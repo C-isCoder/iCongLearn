@@ -1,10 +1,10 @@
-package com.baichang.android.architecture.MVP;
+package com.baichang.android.architecture.login.model;
 
 /**
  * Created by test on 2017/2/22.
  */
 
-public class ILoginInteractorImpl implements ILoginInteractor {
+public class ILoginInteractorImpl implements ILoginInteraction {
 
   @Override
   public void Login(final String name, final String pw, final ILoginListener listener) {

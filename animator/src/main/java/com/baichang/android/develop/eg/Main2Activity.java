@@ -1,11 +1,8 @@
 package com.baichang.android.develop.eg;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.baichang.android.develop.R;
@@ -16,7 +13,6 @@ public class Main2Activity extends AppCompatActivity {
   private ImageView i2;
   private ImageView i3;
   private ImageView i4;
-
   private float i1Current = 200;
   private float i2Current = 300;
   private float i3Current = 400;

@@ -1,16 +1,19 @@
-package com.baichang.android.architecture.MVP;
+package com.baichang.android.architecture.login;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.baichang.android.architecture.R;
+import com.baichang.android.architecture.common.BaseActivity;
+import com.baichang.android.architecture.login.present.ILoginPresent;
+import com.baichang.android.architecture.login.present.ILoginPresentImpl;
+import com.baichang.android.architecture.login.view.ILoginView;
 
-public class MVPLoginActivity extends AppCompatActivity implements ILoginView, OnClickListener {
+public class LoginActivity extends BaseActivity implements ILoginView, OnClickListener {
 
   private EditText etName;
   private EditText etPw;
@@ -57,6 +60,11 @@ public class MVPLoginActivity extends AppCompatActivity implements ILoginView, O
   @Override
   public void showMessage(String msg) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+  }
+
+  @Override
+  public void startActivity(Intent intent, Class target) {
+
   }
 
 

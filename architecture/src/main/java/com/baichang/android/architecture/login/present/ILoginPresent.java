@@ -1,4 +1,4 @@
-package com.baichang.android.architecture.MVP;
+package com.baichang.android.architecture.login.present;
 
 /**
  * Created by iscod on 2017/2/21.

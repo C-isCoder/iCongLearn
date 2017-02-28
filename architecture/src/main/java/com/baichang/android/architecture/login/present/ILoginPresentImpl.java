@@ -1,8 +1,11 @@
-package com.baichang.android.architecture.MVP;
+package com.baichang.android.architecture.login.present;
 
 
 import android.app.Activity;
-import com.baichang.android.architecture.MVP.ILoginInteractor.ILoginListener;
+import com.baichang.android.architecture.login.model.ILoginInteraction;
+import com.baichang.android.architecture.login.model.ILoginInteraction.ILoginListener;
+import com.baichang.android.architecture.login.model.ILoginInteractorImpl;
+import com.baichang.android.architecture.login.view.ILoginView;
 
 /**
  * Created by test on 2017/2/22.
@@ -12,14 +15,14 @@ public class ILoginPresentImpl implements ILoginPresent, ILoginListener {
 
   private ILoginView loginView;
 
-  private ILoginInteractor loginInteractor;
+  private ILoginInteraction loginInteraction;
 
   private Activity activity;
 
   public ILoginPresentImpl(Activity activity, ILoginView loginView) {
     this.loginView = loginView;
     this.activity = activity;
-    this.loginInteractor = new ILoginInteractorImpl();
+    this.loginInteraction = new ILoginInteractorImpl();
   }
 
   @Override
@@ -54,7 +57,7 @@ public class ILoginPresentImpl implements ILoginPresent, ILoginListener {
     if (loginView != null) {
       loginView.showProgressBar();
     }
-    loginInteractor.Login(username, password, this);
+    loginInteraction.Login(username, password, this);
   }
 
   @Override

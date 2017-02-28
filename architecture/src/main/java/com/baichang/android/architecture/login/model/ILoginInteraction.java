@@ -1,10 +1,10 @@
-package com.baichang.android.architecture.MVP;
+package com.baichang.android.architecture.login.model;
 
 /**
  * Created by test on 2017/2/22.
  */
 
-public interface ILoginInteractor {
+public interface ILoginInteraction {
   interface ILoginListener {
 
     void success();
