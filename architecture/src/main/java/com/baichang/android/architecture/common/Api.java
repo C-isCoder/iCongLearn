@@ -4,7 +4,6 @@ import com.baichang.android.architecture.entity.NewsDetailData;
 import com.baichang.android.architecture.entity.NewsStoriesData;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -13,7 +12,7 @@ import rx.Observable;
  * C is a Coder
  */
 
-public interface Api {
+public interface API {
 
   @GET("latest")
   Observable<BaseData<NewsStoriesData>> getList();

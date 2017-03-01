@@ -6,7 +6,7 @@ package com.baichang.android.architecture.login.present;
 
 public interface ILoginPresent {
 
-  void validateCredentials(String username, String password);
+  void login(String username, String password);
 
   void onDestroy();
 }

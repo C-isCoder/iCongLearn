@@ -3,12 +3,12 @@ package com.baichang.android.architecture.news.view;
 import com.baichang.android.architecture.common.IBaseView;
 
 /**
- * Created by iCong on 2017/2/28.
+ * Created by iCong on 2017/3/1.
  *
  * C is a Coder
  */
 
-public interface INewsView extends IBaseView {
+public interface INewsDetailView extends IBaseView {
 
-  void gotoDetail(int newsId);
+  void showWebView(String body);
 }

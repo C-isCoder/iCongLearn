@@ -3,42 +3,39 @@ package com.baichang.android.architecture.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.baichang.android.architecture.R;
 import com.baichang.android.architecture.common.BaseActivity;
 import com.baichang.android.architecture.login.present.ILoginPresent;
 import com.baichang.android.architecture.login.present.ILoginPresentImpl;
 import com.baichang.android.architecture.login.view.ILoginView;
+import com.baichang.android.architecture.news.NewsActivity;
 
-public class LoginActivity extends BaseActivity implements ILoginView, OnClickListener {
+public class LoginActivity extends BaseActivity implements ILoginView {
 
-  private EditText etName;
-  private EditText etPw;
-  private ProgressBar pbBar;
+  @BindView(R.id.et_name)
+  EditText etName;
+  @BindView(R.id.et_pw)
+  EditText etPw;
+  @BindView(R.id.pb_bar)
+  ProgressBar pbBar;
+
   private ILoginPresent loginPresent;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
-    initView();
+    ButterKnife.bind(this);
     initMVP();
   }
 
   // mvp init
   private void initMVP() {
     loginPresent = new ILoginPresentImpl(this, this);
-  }
-
-  // view init
-  private void initView() {
-    etName = (EditText) findViewById(R.id.et_name);
-    etPw = (EditText) findViewById(R.id.et_pw);
-    findViewById(R.id.btn_login).setOnClickListener(this);
-    pbBar = (ProgressBar) findViewById(R.id.pb_bar);
   }
 
   @Override
@@ -53,25 +50,23 @@ public class LoginActivity extends BaseActivity implements ILoginView, OnClickLi
 
   @Override
   public void gotoHome() {
-    //跳转到主页
-    Toast.makeText(this, "跳转主页", Toast.LENGTH_SHORT).show();
+    startActivity(new Intent(this, NewsActivity.class));
+  }
+
+  @Override
+  public void clean() {
+    etName.setText("");
+    etPw.setText("");
   }
 
   @Override
   public void showMessage(String msg) {
-    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-  }
-
-  @Override
-  public void startActivity(Intent intent, Class target) {
-
+    showToast(msg);
   }
 
 
-  @Override
-  public void onClick(View v) {
-    // 登陆
-    loginPresent.validateCredentials(etName.getText().toString(), etPw.getText().toString());
+  public void login(View view) {
+    loginPresent.login(etName.getText().toString(), etPw.getText().toString());
   }
 
   @Override

@@ -1,6 +1,5 @@
 package com.baichang.android.architecture.news.present;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import com.baichang.android.architecture.adapter.NewsAdapter;
@@ -10,7 +9,6 @@ import com.baichang.android.architecture.entity.NewsStoriesData;
 import com.baichang.android.architecture.event.MQ;
 import com.baichang.android.architecture.news.NewsDetailActivity;
 import com.baichang.android.architecture.news.model.INewsInteraction;
-import com.baichang.android.architecture.news.model.INewsInteraction.IJokeListener;
 import com.baichang.android.architecture.news.model.INewsInteractionImpl;
 import com.baichang.android.architecture.news.view.INewsView;
 import java.util.ArrayList;
@@ -24,7 +22,8 @@ import org.greenrobot.eventbus.ThreadMode;
  * C is a Coder
  */
 
-public class INewsPresentImpl implements INewsPresent, IJokeListener, ItemOnClickListener {
+public class INewsPresentImpl implements INewsPresent,
+    INewsInteraction.BaseListener<ArrayList<NewsStoriesData>>, ItemOnClickListener {
 
   private INewsView mView;
   private INewsInteraction mInteraction;
@@ -37,21 +36,20 @@ public class INewsPresentImpl implements INewsPresent, IJokeListener, ItemOnClic
     mList = new ArrayList<>();
     mAdapter = new NewsAdapter(mList);
     mAdapter.setItemOnClickListener(this);
+    EventBus.getDefault().register(this);
   }
 
   @Override
   public void onDestroy() {
+    mInteraction.cancel(INewsInteractionImpl.NEWS_LIST);
     mView = null;
     EventBus.getDefault().unregister(this);
   }
 
   @Override
   public void onStart() {
-    if (mView != null) {
-      mView.showProgressBar();
-      mInteraction.getJokeList(this);
-    }
-    EventBus.getDefault().register(this);
+    mView.showProgressBar();
+    mInteraction.getNewsList(this);
   }
 
   @Override
@@ -61,39 +59,32 @@ public class INewsPresentImpl implements INewsPresent, IJokeListener, ItemOnClic
 
   @Override
   public void success(ArrayList<NewsStoriesData> list) {
-    if (mView != null) {
-      mView.hideProgressBar();
-      mList.addAll(list);
-      mAdapter.notifyDataSetChanged();
-      BaseEventData eventData = new BaseEventData(MQ.EVENT_NEWS_TITLE, list.get(0).title);
-      EventBus.getDefault().post(eventData);
+    mView.hideProgressBar();
+    if (!mList.isEmpty()) {
+      mList.clear();
     }
+    mList.addAll(list);
+    mAdapter.notifyDataSetChanged();
+    BaseEventData eventData = new BaseEventData(MQ.EVENT_NEWS_TITLE, list.get(0).title);
+    EventBus.getDefault().post(eventData);
   }
 
   @Override
   public void error(String error) {
-    if (mView != null) {
-      mView.hideProgressBar();
-      mView.showMessage(error);
-    }
+    mView.hideProgressBar();
+    mView.showMessage(error);
   }
 
   @Subscribe(threadMode = ThreadMode.MAIN)
   public void doEvent(BaseEventData<String, String> eventData) {
     if (eventData.type == MQ.EVENT_NEWS_TITLE) {
-      if (mView != null) {
-        mView.showMessage(eventData.value);
-      }
+      mView.showMessage(eventData.value);
       Log.e("EventBus", eventData.value);
     }
   }
 
   @Override
   public void ItemOnClick(int position) {
-    if (mView != null) {
-      Intent intent = new Intent();
-      intent.putExtra(MQ.ACTION_NEWS_ID, mList.get(position).id);
-      mView.startActivity(intent, NewsDetailActivity.class);
-    }
+    mView.gotoDetail(mList.get(position).id);
   }
 }

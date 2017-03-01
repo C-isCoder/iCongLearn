@@ -16,27 +16,30 @@ import rx.schedulers.Schedulers;
  * C is a Coder
  */
 
-public class ApiWrapper implements Api {
+public class APIWrapper implements API {
+
+  private static Retrofit RETROFIT;
+
+  public APIWrapper() {
+    if (RETROFIT == null) {
+      RETROFIT = new Retrofit.Builder()
+          .baseUrl(APIConstants.API_DEFAULT_HOST)
+          .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+          .addConverterFactory(GsonConverterFactory.create())
+          .build();
+    }
+  }
 
   @Override
   public Observable<BaseData<NewsStoriesData>> getList() {
-    Retrofit retrofit = new Retrofit.Builder()
-        .baseUrl(APIConstants.API_DEFAULT_HOST)
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build();
-    return retrofit.create(Api.class).getList().subscribeOn(Schedulers.io())
+    return RETROFIT.create(API.class).getList().subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
   @Override
   public Observable<NewsDetailData> getDetail(@Path("id") int id) {
-    Retrofit retrofit = new Retrofit.Builder()
-        .baseUrl(APIConstants.API_DEFAULT_HOST)
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build();
-    return retrofit.create(Api.class).getDetail(id).subscribeOn(Schedulers.io())
+    return RETROFIT.create(API.class).getDetail(id).subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
+
 }

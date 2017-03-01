@@ -1,5 +1,6 @@
 package com.baichang.android.architecture.news.model;
 
+import com.baichang.android.architecture.common.IBaseInteraction;
 import com.baichang.android.architecture.entity.NewsStoriesData;
 import java.util.ArrayList;
 
@@ -9,14 +10,11 @@ import java.util.ArrayList;
  * C is a Coder
  */
 
-public interface INewsInteraction {
+public interface INewsInteraction extends IBaseInteraction {
 
-  interface IJokeListener {
+  void getNewsList(INewsInteraction.BaseListener<ArrayList<NewsStoriesData>> listener);
 
-    void success(ArrayList<NewsStoriesData> list);
+  void getNewsDetail(int newsId, INewsInteraction.BaseListener<String> listener);
 
-    void error(String error);
-  }
-
-  void getJokeList(INewsInteraction.IJokeListener listener);
+  void cancel(int key);
 }

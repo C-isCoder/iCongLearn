@@ -1,16 +1,12 @@
 package com.baichang.android.architecture.login.model;
 
+import com.baichang.android.architecture.common.IBaseInteraction;
+
 /**
  * Created by test on 2017/2/22.
  */
 
-public interface ILoginInteraction {
-  interface ILoginListener {
+public interface ILoginInteraction extends IBaseInteraction {
 
-    void success();
-
-    void error();
-  }
-
-  void Login(String name, String pw, ILoginListener listener);
+  void Login(String name, String pw, ILoginInteraction.BaseListener listener);
 }

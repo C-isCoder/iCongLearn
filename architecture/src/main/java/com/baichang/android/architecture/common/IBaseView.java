@@ -1,7 +1,5 @@
 package com.baichang.android.architecture.common;
 
-import android.content.Intent;
-
 /**
  * Created by iCong on 2017/2/28.
  *
@@ -16,5 +14,4 @@ public interface IBaseView {
 
   void showMessage(String msg);
 
-  void startActivity(Intent intent, Class target);
 }

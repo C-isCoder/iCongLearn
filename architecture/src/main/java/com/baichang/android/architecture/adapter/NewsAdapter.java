@@ -53,7 +53,7 @@ public class NewsAdapter extends Adapter<NewsHolder> {
 
     @BindView(R.id.item_news_tv_title)
     TextView tvId;
-    @BindView(R.id.item_joke_iv_img)
+    @BindView(R.id.item_news_iv_img)
     ImageView ivImage;
 
     public NewsHolder(View itemView) {

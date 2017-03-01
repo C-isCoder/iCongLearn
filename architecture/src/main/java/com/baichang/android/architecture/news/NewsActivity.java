@@ -6,11 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.baichang.android.architecture.R;
 import com.baichang.android.architecture.common.BaseActivity;
+import com.baichang.android.architecture.event.MQ;
 import com.baichang.android.architecture.news.present.INewsPresent;
 import com.baichang.android.architecture.news.present.INewsPresentImpl;
 import com.baichang.android.architecture.news.view.INewsView;
@@ -51,14 +51,9 @@ public class NewsActivity extends BaseActivity implements INewsView {
 
   @Override
   public void showMessage(String msg) {
-    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    showToast(msg);
   }
 
-  @Override
-  public void startActivity(Intent intent, Class target) {
-    intent.setClass(this, target);
-    startActivity(intent);
-  }
 
   @Override
   protected void onStart() {
@@ -70,5 +65,12 @@ public class NewsActivity extends BaseActivity implements INewsView {
   protected void onDestroy() {
     super.onDestroy();
     mPresent.onDestroy();
+  }
+
+  @Override
+  public void gotoDetail(int newsId) {
+    Intent intent = new Intent(this, NewsDetailActivity.class);
+    intent.putExtra(MQ.ACTION_NEWS_ID, newsId);
+    startActivity(intent);
   }
 }

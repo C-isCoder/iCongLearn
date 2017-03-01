@@ -3,15 +3,14 @@ package com.baichang.android.architecture.login.present;
 
 import android.app.Activity;
 import com.baichang.android.architecture.login.model.ILoginInteraction;
-import com.baichang.android.architecture.login.model.ILoginInteraction.ILoginListener;
-import com.baichang.android.architecture.login.model.ILoginInteractorImpl;
+import com.baichang.android.architecture.login.model.ILoginInteractionImpl;
 import com.baichang.android.architecture.login.view.ILoginView;
 
 /**
  * Created by test on 2017/2/22.
  */
 
-public class ILoginPresentImpl implements ILoginPresent, ILoginListener {
+public class ILoginPresentImpl implements ILoginPresent, ILoginInteraction.BaseListener {
 
   private ILoginView loginView;
 
@@ -22,41 +21,12 @@ public class ILoginPresentImpl implements ILoginPresent, ILoginListener {
   public ILoginPresentImpl(Activity activity, ILoginView loginView) {
     this.loginView = loginView;
     this.activity = activity;
-    this.loginInteraction = new ILoginInteractorImpl();
+    this.loginInteraction = new ILoginInteractionImpl();
   }
 
   @Override
-  public void success() {
-    if (loginView != null && activity != null) {
-      activity.runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
-          loginView.showMessage("登陆成功");
-          loginView.hideProgressBar();
-          loginView.gotoHome();
-        }
-      });
-    }
-  }
-
-  @Override
-  public void error() {
-    if (loginView != null && activity != null) {
-      activity.runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
-          loginView.showMessage("登陆失败");
-          loginView.hideProgressBar();
-        }
-      });
-    }
-  }
-
-  @Override
-  public void validateCredentials(String username, String password) {
-    if (loginView != null) {
-      loginView.showProgressBar();
-    }
+  public void login(String username, String password) {
+    loginView.showProgressBar();
     loginInteraction.Login(username, password, this);
   }
 
@@ -64,5 +34,29 @@ public class ILoginPresentImpl implements ILoginPresent, ILoginListener {
   public void onDestroy() {
     loginView = null;
     activity = null;
+  }
+
+  @Override
+  public void success(Object o) {
+    activity.runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        loginView.showMessage("登陆成功");
+        loginView.hideProgressBar();
+        loginView.gotoHome();
+      }
+    });
+  }
+
+  @Override
+  public void error(String error) {
+    activity.runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        loginView.hideProgressBar();
+        loginView.clean();
+        loginView.showMessage("登陆失败，用户名或密码错误");
+      }
+    });
   }
 }
