@@ -8,6 +8,6 @@ import com.baichang.android.architecture.common.IBasePresent;
  * C is a Coder
  */
 
-public interface INewsDetailPresent extends IBasePresent {
+public interface NewsDetailPresent extends IBasePresent {
 
 }

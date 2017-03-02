@@ -9,7 +9,7 @@ import com.baichang.android.architecture.common.IBasePresent;
  * C is a Coder
  */
 
-public interface INewsPresent extends IBasePresent {
+public interface NewsPresent extends IBasePresent {
 
   void attachRecyclerView(RecyclerView view);
 }

@@ -1,10 +1,12 @@
-package com.baichang.android.architecture.login.model;
+package com.baichang.android.architecture.login.model.impl;
+
+import com.baichang.android.architecture.login.model.LoginInteraction;
 
 /**
  * Created by test on 2017/2/22.
  */
 
-public class ILoginInteractionImpl implements ILoginInteraction {
+public class LoginInteractionImpl implements LoginInteraction {
 
 
   @Override

@@ -1,4 +1,4 @@
-package com.baichang.android.architecture.entity;
+package com.baichang.android.architecture.news.entity;
 
 import com.google.gson.annotations.Expose;
 

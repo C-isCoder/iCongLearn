@@ -1,7 +1,7 @@
 package com.baichang.android.architecture.common;
 
-import com.baichang.android.architecture.entity.NewsDetailData;
-import com.baichang.android.architecture.entity.NewsStoriesData;
+import com.baichang.android.architecture.news.entity.NewsDetailData;
+import com.baichang.android.architecture.news.entity.NewsStoriesData;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

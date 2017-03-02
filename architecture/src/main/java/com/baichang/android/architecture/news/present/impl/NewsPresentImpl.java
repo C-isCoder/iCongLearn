@@ -1,16 +1,17 @@
-package com.baichang.android.architecture.news.present;
+package com.baichang.android.architecture.news.present.impl;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import com.baichang.android.architecture.adapter.NewsAdapter;
-import com.baichang.android.architecture.adapter.NewsAdapter.ItemOnClickListener;
 import com.baichang.android.architecture.common.BaseEventData;
-import com.baichang.android.architecture.entity.NewsStoriesData;
-import com.baichang.android.architecture.event.MQ;
-import com.baichang.android.architecture.news.NewsDetailActivity;
-import com.baichang.android.architecture.news.model.INewsInteraction;
-import com.baichang.android.architecture.news.model.INewsInteractionImpl;
-import com.baichang.android.architecture.news.view.INewsView;
+import com.baichang.android.architecture.common.FLAG;
+import com.baichang.android.architecture.mq.NewsMQ;
+import com.baichang.android.architecture.news.adapter.NewsAdapter;
+import com.baichang.android.architecture.news.adapter.NewsAdapter.ItemOnClickListener;
+import com.baichang.android.architecture.news.entity.NewsStoriesData;
+import com.baichang.android.architecture.news.model.NewsInteraction;
+import com.baichang.android.architecture.news.model.impl.NewsInteractionImpl;
+import com.baichang.android.architecture.news.present.NewsPresent;
+import com.baichang.android.architecture.news.view.NewsView;
 import java.util.ArrayList;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -22,28 +23,32 @@ import org.greenrobot.eventbus.ThreadMode;
  * C is a Coder
  */
 
-public class INewsPresentImpl implements INewsPresent,
-    INewsInteraction.BaseListener<ArrayList<NewsStoriesData>>, ItemOnClickListener {
+public class NewsPresentImpl implements NewsPresent,
+    NewsInteraction.BaseListener<ArrayList<NewsStoriesData>>, ItemOnClickListener, NewsMQ {
 
-  private INewsView mView;
-  private INewsInteraction mInteraction;
+  private NewsView mView;
+  private NewsInteraction mInteraction;
   private NewsAdapter mAdapter;
   private ArrayList<NewsStoriesData> mList;
+  private static String mTitle;
 
-  public INewsPresentImpl(INewsView view) {
+  public NewsPresentImpl(NewsView view) {
     mView = view;
-    mInteraction = new INewsInteractionImpl();
+    mInteraction = new NewsInteractionImpl();
     mList = new ArrayList<>();
     mAdapter = new NewsAdapter(mList);
     mAdapter.setItemOnClickListener(this);
     EventBus.getDefault().register(this);
   }
 
+  public NewsPresentImpl() {
+  }
+
   @Override
   public void onDestroy() {
-    mInteraction.cancel(INewsInteractionImpl.NEWS_LIST);
+    mInteraction.cancel(NewsInteractionImpl.NEWS_LIST);
     mView = null;
-    EventBus.getDefault().unregister(this);
+    //EventBus.getDefault().unregister(this);
   }
 
   @Override
@@ -65,8 +70,9 @@ public class INewsPresentImpl implements INewsPresent,
     }
     mList.addAll(list);
     mAdapter.notifyDataSetChanged();
-    BaseEventData eventData = new BaseEventData(MQ.EVENT_NEWS_TITLE, list.get(0).title);
-    EventBus.getDefault().post(eventData);
+    mTitle = list.get(0).title;
+    //BaseEventData eventData = new BaseEventData(FLAG.EVENT_NEWS_TITLE, list.get(0).title);
+    //EventBus.getDefault().post(eventData);
   }
 
   @Override
@@ -77,14 +83,19 @@ public class INewsPresentImpl implements INewsPresent,
 
   @Subscribe(threadMode = ThreadMode.MAIN)
   public void doEvent(BaseEventData<String, String> eventData) {
-    if (eventData.type == MQ.EVENT_NEWS_TITLE) {
+    if (eventData.type == FLAG.EVENT_NEWS_TITLE) {
       mView.showMessage(eventData.value);
       Log.e("EventBus", eventData.value);
     }
   }
 
   @Override
-  public void ItemOnClick(int position) {
+  public void onClickItem(int position) {
     mView.gotoDetail(mList.get(position).id);
+  }
+
+  @Override
+  public String getTitle() {
+    return mTitle;
   }
 }

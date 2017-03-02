@@ -11,23 +11,23 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.baichang.android.architecture.R;
 import com.baichang.android.architecture.common.BaseActivity;
-import com.baichang.android.architecture.event.MQ;
-import com.baichang.android.architecture.news.present.INewsDetailPresent;
-import com.baichang.android.architecture.news.present.INewsDetailPresentImpl;
-import com.baichang.android.architecture.news.view.INewsDetailView;
+import com.baichang.android.architecture.common.FLAG;
+import com.baichang.android.architecture.news.present.NewsDetailPresent;
+import com.baichang.android.architecture.news.present.impl.NewsDetailPresentImpl;
+import com.baichang.android.architecture.news.view.NewsDetailView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class NewsDetailActivity extends BaseActivity implements INewsDetailView {
+public class NewsDetailActivity extends BaseActivity implements NewsDetailView {
 
   @BindView(R.id.news_detail_web)
   WebView mWebView;
   @BindView(R.id.news_detail_bar)
   ProgressBar mProgress;
 
-  private INewsDetailPresent mPresent;
+  private NewsDetailPresent mPresent;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,8 @@ public class NewsDetailActivity extends BaseActivity implements INewsDetailView 
   }
 
   private void initPresent(Intent intent) {
-    int id = intent.getExtras().getInt(MQ.ACTION_NEWS_ID);
-    mPresent = new INewsDetailPresentImpl(id, this);
+    int id = intent.getExtras().getInt(FLAG.ACTION_NEWS_ID);
+    mPresent = new NewsDetailPresentImpl(id, this);
   }
 
   @Override
@@ -62,7 +62,7 @@ public class NewsDetailActivity extends BaseActivity implements INewsDetailView 
   }
 
 //  private void initData(Intent intent) {
-//    int id = intent.getExtras().getInt(MQ.ACTION_NEWS_ID);
+//    int id = intent.getExtras().getInt(FLAG.ACTION_NEWS_ID);
 //    API api = new APIWrapper();
 //    api.getDetail(id).doOnSubscribe(new Action0() {
 //      @Override

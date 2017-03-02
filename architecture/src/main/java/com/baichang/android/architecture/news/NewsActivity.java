@@ -10,19 +10,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.baichang.android.architecture.R;
 import com.baichang.android.architecture.common.BaseActivity;
-import com.baichang.android.architecture.event.MQ;
-import com.baichang.android.architecture.news.present.INewsPresent;
-import com.baichang.android.architecture.news.present.INewsPresentImpl;
-import com.baichang.android.architecture.news.view.INewsView;
+import com.baichang.android.architecture.common.FLAG;
+import com.baichang.android.architecture.news.present.NewsPresent;
+import com.baichang.android.architecture.news.present.impl.NewsPresentImpl;
+import com.baichang.android.architecture.news.view.NewsView;
 
-public class NewsActivity extends BaseActivity implements INewsView {
+public class NewsActivity extends BaseActivity implements NewsView {
 
   @BindView(R.id.news_rv_list)
   RecyclerView rvList;
   @BindView(R.id.news_bar)
   ProgressBar newsBar;
-
-  private INewsPresent mPresent;
+  private NewsPresent mPresent;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class NewsActivity extends BaseActivity implements INewsView {
 
   private void initPresent() {
     rvList.setLayoutManager(new LinearLayoutManager(this));
-    mPresent = new INewsPresentImpl(this);
+    mPresent = new NewsPresentImpl(this);
     mPresent.attachRecyclerView(rvList);
   }
 
@@ -70,7 +69,7 @@ public class NewsActivity extends BaseActivity implements INewsView {
   @Override
   public void gotoDetail(int newsId) {
     Intent intent = new Intent(this, NewsDetailActivity.class);
-    intent.putExtra(MQ.ACTION_NEWS_ID, newsId);
+    intent.putExtra(FLAG.ACTION_NEWS_ID, newsId);
     startActivity(intent);
   }
 }

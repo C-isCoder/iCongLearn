@@ -8,7 +8,7 @@ import com.baichang.android.architecture.common.IBaseView;
  * C is a Coder
  */
 
-public interface INewsView extends IBaseView {
+public interface NewsView extends IBaseView {
 
   void gotoDetail(int newsId);
 }

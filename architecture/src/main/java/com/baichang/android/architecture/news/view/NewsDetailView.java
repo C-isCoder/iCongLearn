@@ -8,7 +8,7 @@ import com.baichang.android.architecture.common.IBaseView;
  * C is a Coder
  */
 
-public interface INewsDetailView extends IBaseView {
+public interface NewsDetailView extends IBaseView {
 
   void showWebView(String body);
 }

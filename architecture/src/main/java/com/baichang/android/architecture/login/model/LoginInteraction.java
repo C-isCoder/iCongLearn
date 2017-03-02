@@ -6,7 +6,7 @@ import com.baichang.android.architecture.common.IBaseInteraction;
  * Created by test on 2017/2/22.
  */
 
-public interface ILoginInteraction extends IBaseInteraction {
+public interface LoginInteraction extends IBaseInteraction {
 
-  void Login(String name, String pw, ILoginInteraction.BaseListener listener);
+  void Login(String name, String pw, LoginInteraction.BaseListener listener);
 }

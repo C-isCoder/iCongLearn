@@ -1,11 +1,12 @@
-package com.baichang.android.architecture.news.model;
+package com.baichang.android.architecture.news.model.impl;
 
 import android.util.SparseArray;
 import com.baichang.android.architecture.common.API;
 import com.baichang.android.architecture.common.APIWrapper;
 import com.baichang.android.architecture.common.BaseData;
-import com.baichang.android.architecture.entity.NewsDetailData;
-import com.baichang.android.architecture.entity.NewsStoriesData;
+import com.baichang.android.architecture.news.entity.NewsDetailData;
+import com.baichang.android.architecture.news.entity.NewsStoriesData;
+import com.baichang.android.architecture.news.model.NewsInteraction;
 import java.util.ArrayList;
 import rx.Subscriber;
 import rx.Subscription;
@@ -16,12 +17,12 @@ import rx.Subscription;
  * C is a Coder
  */
 
-public class INewsInteractionImpl implements INewsInteraction {
+public class NewsInteractionImpl implements NewsInteraction {
 
   private static API api;
   private static SparseArray<Subscription> map;
 
-  public INewsInteractionImpl() {
+  public NewsInteractionImpl() {
     if (api == null) {
       api = new APIWrapper();
     }

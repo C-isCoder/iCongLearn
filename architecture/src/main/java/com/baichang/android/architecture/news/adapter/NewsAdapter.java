@@ -1,4 +1,4 @@
-package com.baichang.android.architecture.adapter;
+package com.baichang.android.architecture.news.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.baichang.android.architecture.R;
-import com.baichang.android.architecture.adapter.NewsAdapter.NewsHolder;
-import com.baichang.android.architecture.entity.NewsStoriesData;
+import com.baichang.android.architecture.news.adapter.NewsAdapter.NewsHolder;
+import com.baichang.android.architecture.news.entity.NewsStoriesData;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
@@ -62,7 +62,7 @@ public class NewsAdapter extends Adapter<NewsHolder> {
         @Override
         public void onClick(View v) {
           if (listener != null) {
-            listener.ItemOnClick(getAdapterPosition());
+            listener.onClickItem(getAdapterPosition());
           }
         }
       });
@@ -79,6 +79,6 @@ public class NewsAdapter extends Adapter<NewsHolder> {
 
   public interface ItemOnClickListener {
 
-    void ItemOnClick(int position);
+    void onClickItem(int position);
   }
 }
