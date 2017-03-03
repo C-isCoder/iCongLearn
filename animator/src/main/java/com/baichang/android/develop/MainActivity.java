@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
     int heapSize = manager.getMemoryClass();
     Log.e("内存：", String.valueOf(heapSize));
-    ViewPropertyAnimator();
+    //ViewPropertyAnimator();
   }
 
   private void initView() {
