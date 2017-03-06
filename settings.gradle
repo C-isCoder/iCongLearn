@@ -1,1 +1,1 @@
-include ':animator', ':layout', ':architecture', ':google_mvp'
+include ':animator', ':layout', ':architecture', ':google_mvp', ':database'
