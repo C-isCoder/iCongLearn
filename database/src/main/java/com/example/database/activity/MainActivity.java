@@ -1,5 +1,6 @@
 package com.example.database.activity;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.example.database.R;
 import com.example.database.adapter.MainAdapter;
 import com.example.database.entity.User;
+import com.example.database.utils.Util;
 import io.realm.Realm;
 import io.realm.Realm.Transaction;
 import io.realm.Realm.Transaction.OnError;
@@ -23,17 +25,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
+  private static final String TAG = MainActivity.class.getSimpleName();
   private TextView tvResult;
 
   private Realm mRealm;
   private RealmAsyncTask mRealmAsyncTask;
-  private List<User> mTestList;
+  private SharedPreferences mPreferences;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    initTestData();
+    mPreferences = getSharedPreferences(MainActivity.class.getSimpleName(), MODE_PRIVATE);
     initDatabase();
     initView();
   }
@@ -48,50 +51,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     ((ListView) findViewById(R.id.list_view)).setAdapter(new MainAdapter(queryAll()));
   }
 
-  // init test data
-  private void initTestData() {
-    if (mTestList == null) {
-      mTestList = new ArrayList<>();
-    }
-    User user1 = new User();
-    user1.setId(0);
-    user1.setName("iCong");
-    user1.setAge(27);
-    user1.setSessionId(10010);
-    User user2 = new User();
-    user2.setId(1);
-    user2.setName("QiQi");
-    user2.setAge(27);
-    user2.setSessionId(10011);
-    User user3 = new User();
-    user3.setId(2);
-    user3.setName("Baby");
-    user3.setAge(18);
-    user3.setSessionId(10012);
-    mTestList.add(user1);
-    mTestList.add(user2);
-    mTestList.add(user3);
-  }
-
   // init db
   private void initDatabase() {
     mRealm = Realm.getDefaultInstance();
-//    mRealm.addChangeListener(new RealmChangeListener<Realm>() {
-//      @Override
-//      public void onChange(Realm element) {
-//        mAdapter.notifyDataSetChanged();
-//      }
-//    });
     // auto update data
     mRealm.setAutoRefresh(true);
-    clearDatabase();
     // init User db data
+    if (mPreferences.getBoolean("first", false)) {
+      Log.e(TAG, "true");
+      return;
+    }
     mRealmAsyncTask = mRealm.executeTransactionAsync(new Transaction() {
       @Override
       public void execute(Realm realm) {
-        for (User user : mTestList) {
+        ArrayList<User> users = Util.getTestData();
+        for (User user : users) {
           User realmUser = realm.createObject(User.class);
-          realmUser.setId(mTestList.indexOf(user));
+          realmUser.setId(users.indexOf(user));
           realmUser.setName(user.getName());
           realmUser.setAge(user.getAge());
           realmUser.setSessionId(user.getSessionId());
@@ -100,12 +76,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }, new OnSuccess() {
       @Override
       public void onSuccess() {
-        Log.e("database", "success");
+        printResult("init db success");
+        mPreferences.edit().putBoolean("first", true).apply();
       }
     }, new OnError() {
       @Override
       public void onError(Throwable error) {
-        Log.e("database", "error: " + error.getMessage());
+        printResult("init db error: " + error.toString());
       }
     });
   }
@@ -143,18 +120,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
   private User queryLast() {
     List<User> users = queryAll();
     return users == null ? null : users.get(users.size() - 1);
-  }
-
-  /**
-   * new User
-   */
-  private User createUser() {
-    User aUser = new User();
-    aUser.setName("add");
-    aUser.setAge(12);
-    aUser.setId(mTestList.size());
-    aUser.setSessionId(10013);
-    return aUser;
   }
 
   /**
@@ -211,6 +176,25 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
   }
 
   /**
+   * db update User
+   */
+  private boolean update(String name, String modify) {
+    boolean result;
+    mRealm.beginTransaction();
+    RealmResults<User> users = mRealm.where(User.class).equalTo("name", name).findAll();
+    if (users.isEmpty()) {
+      result = false;
+    } else {
+      for (User _user : users) {
+        _user.setName(modify);
+      }
+      result = true;
+    }
+    mRealm.commitTransaction();
+    return result;
+  }
+
+  /**
    * db query id User
    *
    * @param id user id
@@ -224,11 +208,32 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     return users;
   }
 
+  /**
+   * db query id User
+   *
+   * @param name user name
+   * @return result list
+   */
+  private RealmResults<User> query(String name) {
+    RealmResults<User> users;
+    mRealm.beginTransaction();
+    users = mRealm.where(User.class).equalTo("name", name).findAll();
+    mRealm.commitTransaction();
+    return users;
+  }
+
   @Override
   public void onClick(View view) {
     switch (view.getId()) {
       case R.id.btn_add:
-        add(createUser());
+        User user = Util.createUser();
+        User last = queryLast();
+        if (last == null) {
+          user.setId(0);
+        } else {
+          user.setId(last.getId() + 1);
+        }
+        add(user);
         printResult("add user\n" + queryLast());
         break;
       case R.id.btn_delete:
@@ -236,16 +241,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         printResult("delete last user success");
         break;
       case R.id.btn_find:
-        List<User> users = query(3);
+        List<User> users = query("add");
         if (users.isEmpty()) {
-          printResult("no query id = 3 User");
+          printResult("no query name = add User");
         } else {
-          printResult("query all User form id = 3\n" + users.toString());
+          printResult("query all User form name = add\n" + users.toString());
         }
         break;
       case R.id.btn_change:
-        if (update(3, "Change")) {
-          printResult("update id = 3 User name update to Change success");
+        if (update("add", "Change")) {
+          printResult("update name = add User name update to Change success");
         } else {
           printResult("no query User");
         }
@@ -264,8 +269,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    mRealmAsyncTask.cancel();
-    mRealm.removeAllChangeListeners();
+    if (mRealmAsyncTask != null) {
+      mRealmAsyncTask.cancel();
+    }
     mRealm.close();
   }
 }

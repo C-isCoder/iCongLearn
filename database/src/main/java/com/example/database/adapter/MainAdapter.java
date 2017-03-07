@@ -8,7 +8,6 @@ import com.example.database.R;
 import com.example.database.entity.User;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
-import io.realm.RealmList;
 
 /**
  * Created by iCong on 2017/3/6.
