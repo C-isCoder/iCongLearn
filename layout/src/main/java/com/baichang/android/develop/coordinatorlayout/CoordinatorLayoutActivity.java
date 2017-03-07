@@ -1,4 +1,4 @@
-package com.baichang.android.develop;
+package com.baichang.android.develop.coordinatorlayout;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.baichang.android.develop.R;
 import java.util.ArrayList;
 import java.util.List;
 

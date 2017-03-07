@@ -24,8 +24,10 @@ public class LoginPresentImpl implements LoginPresent, LoginInteraction.BaseList
   private Activity activity;
 
   public LoginPresentImpl(Activity activity, LoginView loginView) {
+    // 初始化的时候需要把VIew接口的实现实例传入进来。
     this.loginView = loginView;
     this.activity = activity;
+    // 初始化一个model的实现类
     this.loginInteraction = new LoginInteractionImpl();
     RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(activity.getResources(),
         BitmapFactory.decodeResource(activity.getResources(), R.mipmap.avatar));
@@ -43,6 +45,11 @@ public class LoginPresentImpl implements LoginPresent, LoginInteraction.BaseList
   public void onDestroy() {
     loginView = null;
     activity = null;
+  }
+
+  @Override
+  public void onStart() {
+
   }
 
   @Override

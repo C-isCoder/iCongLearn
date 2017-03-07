@@ -26,6 +26,7 @@ public class NewsDetailPresentImpl implements NewsDetailPresent,
     mView = view;
     this.newsId = newsId;
     mInteraction = new NewsInteractionImpl();
+    // 获取mq
     NewsMQ mq = new NewsPresentImpl();
     mView.showMessage(mq.getTitle());
     Log.e("MQ", mq.getTitle());

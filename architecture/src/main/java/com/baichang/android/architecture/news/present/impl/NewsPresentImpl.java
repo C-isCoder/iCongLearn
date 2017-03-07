@@ -93,7 +93,7 @@ public class NewsPresentImpl implements NewsPresent,
   public void onClickItem(int position) {
     mView.gotoDetail(mList.get(position).id);
   }
-
+  // 实现MQ接口
   @Override
   public String getTitle() {
     return mTitle;
