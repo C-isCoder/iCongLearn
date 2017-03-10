@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import com.example.custom.progressview.ProgressView;
+import com.example.custom.progressview.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
