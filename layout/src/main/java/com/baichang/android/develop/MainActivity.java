@@ -7,6 +7,7 @@ import android.view.View;
 import com.baichang.android.develop.bootomnavigation.BottomNavigationActivity;
 import com.baichang.android.develop.coordinatorlayout.CoordinatorLayoutActivity;
 import com.baichang.android.develop.nodatalayout.NoDataBaseActivity;
+import com.baichang.android.develop.recyclerviewSnapHelper.SnapHelperActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,5 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
   public void nodatalayout(View view) {
     startActivity(new Intent(this, NoDataBaseActivity.class));
+  }
+
+  public void recyclerview(View view) {
+    startActivity(new Intent(this, SnapHelperActivity.class));
   }
 }

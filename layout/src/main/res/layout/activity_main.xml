@@ -24,4 +24,10 @@
       android:layout_height="wrap_content"
       android:onClick="nodatalayout"
       android:text="NoDataLayout" />
+
+   <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="recyclerview"
+      android:text="RecyaclerSnapHelper" />
 </LinearLayout>

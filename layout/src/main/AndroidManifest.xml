@@ -24,6 +24,7 @@
          android:label="@string/title_activity_bottom_navigation"
          android:name=".bootomnavigation.BottomNavigationActivity" />
       <activity android:name=".nodatalayout.NoDataBaseActivity" />
+      <activity android:name=".recyclerviewSnapHelper.SnapHelperActivity"></activity>
    </application>
 
 </manifest>
