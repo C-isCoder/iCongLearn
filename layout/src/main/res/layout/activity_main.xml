@@ -28,6 +28,12 @@
    <Button
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:onClick="recyclerview"
+      android:onClick="recyclerviewSnapHelper"
+      android:text="RecyaclerSnapHelper" />
+
+   <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="recycleritemdecoration"
       android:text="RecyaclerSnapHelper" />
 </LinearLayout>
