@@ -29,13 +29,13 @@
       android:layout_height="match_parent"
       android:visibility="gone" />
 
-   <com.baichang.android.develop.qq.QQCircleView
+   <com.baichang.android.develop.qqcircledraganmiator.QQCircleView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
       android:visibility="visible" />
 
-   <com.baichang.android.develop.qq.XiangZi_QQ_Cricle_View
+   <com.baichang.android.develop.qqcircledraganmiator.XiangZi_QQ_Cricle_View
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:visibility="gone"

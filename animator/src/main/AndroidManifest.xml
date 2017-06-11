@@ -17,7 +17,9 @@
       </activity>
       <activity android:name=".eg.Main2Activity" />
       <activity android:name=".advance.ValueAnimatorActivity" />
-      <activity android:name=".spring.SpringAnimatorActivity" />
+      <activity android:name=".springanmiator.SpringAnimatorActivity" />
+      <activity android:name=".vectorDrawable.VectorActivity" />
+      <activity android:name=".vectorDrawable.VectorActivity"></activity>
    </application>
 
 </manifest>

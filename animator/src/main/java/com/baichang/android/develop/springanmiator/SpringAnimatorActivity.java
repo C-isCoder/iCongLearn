@@ -1,4 +1,4 @@
-package com.baichang.android.develop.spring;
+package com.baichang.android.develop.springanmiator;
 
 import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
