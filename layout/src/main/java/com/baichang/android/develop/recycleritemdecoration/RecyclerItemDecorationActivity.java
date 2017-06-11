@@ -51,8 +51,7 @@ public class RecyclerItemDecorationActivity extends AppCompatActivity {
       @Override
       public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
          TextView view = new TextView(parent.getContext());
-         view.setLayoutParams(
-             new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+         view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
          view.setTextSize(14);
          view.setBackgroundColor(Color.WHITE);
          view.setTextColor(Color.BLACK);
