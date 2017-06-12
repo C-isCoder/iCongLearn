@@ -9,9 +9,21 @@
    tools:context="com.baichang.android.develop.vectorDrawable.VectorActivity">
 
    <ImageView
+      android:id="@+id/i1"
       android:layout_width="100dp"
       android:layout_height="100dp"
       android:onClick="anim"
-      android:scaleType="fitXY"
       app:srcCompat="@drawable/vector_glue" />
+
+   <ImageView
+      android:layout_width="wrap_content"
+      android:onClick="anim"
+      app:srcCompat="@drawable/path_anim_vector"
+      android:layout_height="wrap_content" />
+
+   <Button
+      android:onClick="startToL"
+      android:layout_width="match_parent"
+      android:text="Start TO L"
+      android:layout_height="wrap_content" />
 </LinearLayout>

@@ -1,20 +1,14 @@
 package com.baichang.library.test.common;
 
 import android.os.Bundle;
-
-import com.baichang.library.test.R;
-import com.baichang.library.test.base.CommonActivity;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.baichang.android.widget.banner.Banner;
+import com.baichang.android.widget.banner.BannerConfig;
+import com.baichang.android.widget.banner.Transformer;
+import com.baichang.library.test.R;
+import com.baichang.library.test.base.CommonActivity;
+import java.util.Arrays;
 
 public class BannerActivity extends CommonActivity {
     @BindView(R.id.banner)

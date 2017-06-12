@@ -19,7 +19,8 @@
       <activity android:name=".advance.ValueAnimatorActivity" />
       <activity android:name=".springanmiator.SpringAnimatorActivity" />
       <activity android:name=".vectorDrawable.VectorActivity" />
-      <activity android:name=".vectorDrawable.VectorActivity"></activity>
+      <activity android:name=".vectorDrawable.VectorActivity" />
+      <activity android:name=".vectorDrawable.LollipopActivity"></activity>
    </application>
 
 </manifest>
