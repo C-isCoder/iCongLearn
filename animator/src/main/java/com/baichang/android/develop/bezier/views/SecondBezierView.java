@@ -1,6 +1,5 @@
 package com.baichang.android.develop.bezier.views;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import com.baichang.android.develop.advance.ColorEvaluator;
 
 /**
  * Created by iCong on 2017/6/13.
