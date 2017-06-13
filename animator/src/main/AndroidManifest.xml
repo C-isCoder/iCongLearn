@@ -20,7 +20,9 @@
       <activity android:name=".springanmiator.SpringAnimatorActivity" />
       <activity android:name=".vectorDrawable.VectorActivity" />
       <activity android:name=".vectorDrawable.VectorActivity" />
-      <activity android:name=".vectorDrawable.LollipopActivity"></activity>
+      <activity android:name=".vectorDrawable.LollipopActivity" />
+      <activity android:name=".bezier.BezierActivity" />
+      <activity android:name=".bezier.SecondBezierActivity"></activity>
    </application>
 
 </manifest>

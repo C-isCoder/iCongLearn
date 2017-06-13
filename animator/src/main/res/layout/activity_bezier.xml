@@ -6,12 +6,11 @@
    android:layout_height="match_parent"
    android:padding="16dp"
    android:orientation="vertical"
-   tools:context="com.baichang.android.develop.vectorDrawable.LollipopActivity">
+   tools:context="com.baichang.android.develop.bezier.BezierActivity">
 
-   <ImageView
-      android:layout_width="100dp"
-      android:layout_height="100dp"
-      android:layout_gravity="center"
-      android:onClick="anim"
-      app:srcCompat="@drawable/fivestar_anim_vector" />
+   <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="secondBezier"
+      android:text="二阶贝塞尔曲线" />
 </LinearLayout>

@@ -3,6 +3,7 @@
    xmlns:tools="http://schemas.android.com/tools"
    android:layout_width="match_parent"
    android:layout_height="match_parent"
+   android:padding="16dp"
    android:orientation="vertical"
    tools:context="com.baichang.android.develop.MainActivity">
 
@@ -23,4 +24,10 @@
       android:layout_height="wrap_content"
       android:onClick="vector"
       android:text="VectorDrawableActivity" />
+
+   <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="bezier"
+      android:text="BezierActivity" />
 </LinearLayout>

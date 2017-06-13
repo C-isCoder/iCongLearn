@@ -4,6 +4,7 @@
    xmlns:tools="http://schemas.android.com/tools"
    android:layout_width="match_parent"
    android:layout_height="match_parent"
+   android:padding="16dp"
    android:gravity="center_horizontal"
    android:orientation="vertical"
    tools:context="com.baichang.android.develop.vectorDrawable.VectorActivity">
@@ -17,13 +18,15 @@
 
    <ImageView
       android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
       android:onClick="anim"
-      app:srcCompat="@drawable/path_anim_vector"
-      android:layout_height="wrap_content" />
+      app:srcCompat="@drawable/path_anim_vector" />
 
    <Button
-      android:onClick="startToL"
       android:layout_width="match_parent"
-      android:text="Start TO L"
-      android:layout_height="wrap_content" />
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:onClick="startToL"
+      android:text="Start TO L" />
 </LinearLayout>
