@@ -13,4 +13,11 @@
       android:layout_height="wrap_content"
       android:onClick="secondBezier"
       android:text="二阶贝塞尔曲线" />
+
+   <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:onClick="thirdBezier"
+      android:text="三阶贝塞尔曲线" />
 </LinearLayout>
