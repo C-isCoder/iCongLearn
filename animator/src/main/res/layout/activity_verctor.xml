@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:app="http://schemas.android.com/apk/res-auto"
-   xmlns:tools="http://schemas.android.com/tools"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:padding="16dp"
-   android:gravity="center_horizontal"
-   android:orientation="vertical"
-   tools:context="com.baichang.android.develop.vectorDrawable.VectorActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.baichang.android.develop.vectorDrawable.VectorActivity"
+    >
 
-   <ImageView
+  <ImageView
       android:id="@+id/i1"
       android:layout_width="100dp"
       android:layout_height="100dp"
       android:onClick="anim"
-      app:srcCompat="@drawable/vector_glue" />
+      app:srcCompat="@drawable/vector_glue"
+      />
 
-   <ImageView
+  <ImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
       android:onClick="anim"
-      app:srcCompat="@drawable/path_anim_vector" />
+      app:srcCompat="@drawable/path_anim_vector"
+      />
 
-   <Button
+  <Button
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
       android:onClick="startToL"
-      android:text="Start TO L" />
+      android:text="Start TO L"
+      />
 </LinearLayout>

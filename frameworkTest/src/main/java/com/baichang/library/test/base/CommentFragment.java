@@ -1,6 +1,5 @@
 package com.baichang.library.test.base;
 
-
 import com.baichang.android.common.BaseFragment;
 
 /**
@@ -9,12 +8,12 @@ import com.baichang.android.common.BaseFragment;
  */
 
 public class CommentFragment extends BaseFragment {
-    private Api instance;
+  private Api instance;
 
-    public Api api() {
-        if (instance == null) {
-            instance = new ApiWrapper();
-        }
-        return instance;
+  public Api api() {
+    if (instance == null) {
+      instance = new ApiWrapper();
     }
+    return instance;
+  }
 }

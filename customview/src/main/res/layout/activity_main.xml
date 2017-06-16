@@ -1,12 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:app="http://schemas.android.com/apk/res-auto"
-   xmlns:tools="http://schemas.android.com/tools"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:background="#6bc051"
-   tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6bc051"
+    tools:context=".MainActivity"
+    >
 
-   <com.example.custom.progressview.ProgressView
+  <com.example.custom.progressview.ProgressView
       android:id="@+id/progress_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -18,6 +19,7 @@
       app:radius="80dp"
       app:strokeWidth="30dp"
       app:textColor="#ffffff"
-      app:textSize="30sp" />
+      app:textSize="30sp"
+      />
 
 </RelativeLayout>

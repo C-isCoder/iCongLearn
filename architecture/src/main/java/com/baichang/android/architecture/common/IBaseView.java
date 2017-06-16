@@ -13,5 +13,4 @@ public interface IBaseView {
   void hideProgressBar();
 
   void showMessage(String msg);
-
 }

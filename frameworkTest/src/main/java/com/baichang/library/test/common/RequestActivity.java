@@ -28,16 +28,13 @@ import java.util.Map;
 
 public class RequestActivity extends CommonActivity {
 
-  @BindView(R.id.recycler_view)
-  RecyclerView rvList;
-  @BindView(R.id.refresh_layout)
-  SwipeRefreshLayout mRefresh;
+  @BindView(R.id.recycler_view) RecyclerView rvList;
+  @BindView(R.id.refresh_layout) SwipeRefreshLayout mRefresh;
 
   private RecyclerViewAdapter mAdapter;
   private boolean isFirst = true;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_request);
     ButterKnife.bind(this);
@@ -68,8 +65,7 @@ public class RequestActivity extends CommonActivity {
     rvList.setLayoutManager(new LinearLayoutManager(this));
     rvList.setAdapter(mAdapter);
     rvList.addOnScrollListener(new RecyclerView.OnScrollListener() {
-      @Override
-      public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+      @Override public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
         if (RecyclerViewUtils.isScrollBottom(recyclerView)
             && mAdapter.getItemCount() % APIConstants.PAGE_SIZE == 0) {
@@ -80,8 +76,7 @@ public class RequestActivity extends CommonActivity {
     });
   }
 
-  @OnClick({R.id.button, R.id.button1})
-  void onClick(View v) {
+  @OnClick({ R.id.button, R.id.button1 }) void onClick(View v) {
     switch (v.getId()) {
       case R.id.button:
         normalTest();

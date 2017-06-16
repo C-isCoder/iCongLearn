@@ -8,8 +8,7 @@ import android.animation.TypeEvaluator;
 
 public class PointEvaluator implements TypeEvaluator {
 
-  @Override
-  public Object evaluate(float v, Object startValue, Object endValue) {
+  @Override public Object evaluate(float v, Object startValue, Object endValue) {
     Point startPoint = (Point) startValue;
     Point endPoint = (Point) endValue;
     float x = startPoint.getX() + v * (endPoint.getX() - startPoint.getX());

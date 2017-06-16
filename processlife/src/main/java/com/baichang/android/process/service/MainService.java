@@ -17,14 +17,11 @@ public class MainService extends Service {
 
   private static final String TAG = MainService.class.getSimpleName();
 
-  @Nullable
-  @Override
-  public IBinder onBind(Intent intent) {
+  @Nullable @Override public IBinder onBind(Intent intent) {
     return null;
   }
 
-  @Override
-  public void onCreate() {
+  @Override public void onCreate() {
     super.onCreate();
     Builder builder = new Builder(this);
     builder.setContentText("前台服务运行中...");
@@ -36,14 +33,12 @@ public class MainService extends Service {
     startForeground(1, builder.build());
   }
 
-  @Override
-  public int onStartCommand(Intent intent, int flags, int startId) {
+  @Override public int onStartCommand(Intent intent, int flags, int startId) {
     Log.d(TAG, "原地满血复活.....");
     return Service.START_STICKY;
   }
 
-  @Override
-  public void onDestroy() {
+  @Override public void onDestroy() {
     super.onDestroy();
     // 该方法只有在，系统 - 设置里面 结束服务的时候回掉
     Log.d(TAG, "被杀了....");
@@ -51,8 +46,7 @@ public class MainService extends Service {
     startService(new Intent(this, MainService.class));
   }
 
-  @Override
-  public void onTaskRemoved(Intent rootIntent) {
+  @Override public void onTaskRemoved(Intent rootIntent) {
     super.onTaskRemoved(rootIntent);
     Log.d(TAG, "被杀了....");
     Log.d(TAG, "抢救中....");

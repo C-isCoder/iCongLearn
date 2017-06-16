@@ -14,9 +14,7 @@ import rx.Observable;
 
 public interface API {
 
-  @GET("latest")
-  Observable<BaseData<NewsStoriesData>> getList();
+  @GET("latest") Observable<BaseData<NewsStoriesData>> getList();
 
-  @GET("{id}")
-  Observable<NewsDetailData> getDetail(@Path("id") int id);
+  @GET("{id}") Observable<NewsDetailData> getDetail(@Path("id") int id);
 }

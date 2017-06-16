@@ -24,18 +24,18 @@ import com.example.android.architecture.blueprints.todoapp.BaseView;
  */
 public interface StatisticsContract {
 
-    interface View extends BaseView<Presenter> {
+  interface View extends BaseView<Presenter> {
 
-        void setProgressIndicator(boolean active);
+    void setProgressIndicator(boolean active);
 
-        void showStatistics(int numberOfIncompleteTasks, int numberOfCompletedTasks);
+    void showStatistics(int numberOfIncompleteTasks, int numberOfCompletedTasks);
 
-        void showLoadingStatisticsError();
+    void showLoadingStatisticsError();
 
-        boolean isActive();
-    }
+    boolean isActive();
+  }
 
-    interface Presenter extends BasePresenter {
+  interface Presenter extends BasePresenter {
 
-    }
+  }
 }

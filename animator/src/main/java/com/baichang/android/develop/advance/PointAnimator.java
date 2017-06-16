@@ -57,8 +57,7 @@ public class PointAnimator extends View {
     mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.image);
   }
 
-  @Override
-  protected void onDraw(Canvas canvas) {
+  @Override protected void onDraw(Canvas canvas) {
     if (isInEditMode()) {
       return;
     }
@@ -72,8 +71,8 @@ public class PointAnimator extends View {
   }
 
   private void drawRectangle(Canvas canvas) {
-    RectF rectf = new RectF(mCurrentPoint.getX(), mCurrentPoint.getY(),
-        mCurrentPoint.getX() + 50, mCurrentPoint.getY() + 50);
+    RectF rectf = new RectF(mCurrentPoint.getX(), mCurrentPoint.getY(), mCurrentPoint.getX() + 50,
+        mCurrentPoint.getY() + 50);
     canvas.drawRect(rectf, mPaint);
   }
 
@@ -82,22 +81,21 @@ public class PointAnimator extends View {
   }
 
   private void startAnimator() {
-//    Point startPoint = new Point(mDefault, mDefault);
-//    Point endPoint = new Point(getWidth() - mDefault, getHeight() - mDefault);
+    //    Point startPoint = new Point(mDefault, mDefault);
+    //    Point endPoint = new Point(getWidth() - mDefault, getHeight() - mDefault);
     Point startPoint = new Point(getWidth() / 2, mDefault);
     Point endPoint = new Point(getWidth() / 2, getHeight() - mDefault);
     ValueAnimator animator = ValueAnimator.ofObject(new PointEvaluator(), startPoint, endPoint);
     animator.addUpdateListener(new AnimatorUpdateListener() {
-      @Override
-      public void onAnimationUpdate(ValueAnimator valueAnimator) {
+      @Override public void onAnimationUpdate(ValueAnimator valueAnimator) {
         mCurrentPoint = (Point) valueAnimator.getAnimatedValue();
         invalidate();
       }
     });
     //animator.setDuration(5000);
     //animator.start();
-    ObjectAnimator animator1 = ObjectAnimator
-        .ofObject(this, "color", new ColorEvaluator(), "#0000FF", "#FF0000");
+    ObjectAnimator animator1 =
+        ObjectAnimator.ofObject(this, "color", new ColorEvaluator(), "#0000FF", "#FF0000");
     AnimatorSet animatorSet = new AnimatorSet();
     animatorSet.play(animator).with(animator1);
     animatorSet.setDuration(5000);

@@ -25,68 +25,64 @@ import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingRe
 
 import java.util.List;
 
-
 /**
  * Listens to user actions from the UI ({@link StatisticsFragment}), retrieves the data and updates
  * the UI as required.
  */
 public class StatisticsPresenter implements StatisticsContract.Presenter {
 
-    private final TasksRepository mTasksRepository;
+  private final TasksRepository mTasksRepository;
 
-    private final StatisticsContract.View mStatisticsView;
+  private final StatisticsContract.View mStatisticsView;
 
-    public StatisticsPresenter(@NonNull TasksRepository tasksRepository,
-                               @NonNull StatisticsContract.View statisticsView) {
-        mTasksRepository = tasksRepository;
-        mStatisticsView = statisticsView;
+  public StatisticsPresenter(@NonNull TasksRepository tasksRepository,
+      @NonNull StatisticsContract.View statisticsView) {
+    mTasksRepository = tasksRepository;
+    mStatisticsView = statisticsView;
 
-        mStatisticsView.setPresenter(this);
-    }
+    mStatisticsView.setPresenter(this);
+  }
 
-    @Override
-    public void start() {
-        loadStatistics();
-    }
+  @Override public void start() {
+    loadStatistics();
+  }
 
-    private void loadStatistics() {
-        mStatisticsView.setProgressIndicator(true);
+  private void loadStatistics() {
+    mStatisticsView.setProgressIndicator(true);
 
-        // The network request might be handled in a different thread so make sure Espresso knows
-        // that the app is busy until the response is handled.
-        EspressoIdlingResource.increment(); // App is busy until further notice
+    // The network request might be handled in a different thread so make sure Espresso knows
+    // that the app is busy until the response is handled.
+    EspressoIdlingResource.increment(); // App is busy until further notice
 
-        mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
-            @Override
-            public void onTasksLoaded(List<Task> tasks) {
-                int activeTasks = 0;
-                int completedTasks = 0;
+    mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
+      @Override public void onTasksLoaded(List<Task> tasks) {
+        int activeTasks = 0;
+        int completedTasks = 0;
 
-                // We calculate number of active and completed tasks
-                for (Task task : tasks) {
-                    if (task.isCompleted()) {
-                        completedTasks += 1;
-                    } else {
-                        activeTasks += 1;
-                    }
-                }
-                // The view may not be able to handle UI updates anymore
-                if (!mStatisticsView.isActive()) {
-                    return;
-                }
-                mStatisticsView.setProgressIndicator(false);
+        // We calculate number of active and completed tasks
+        for (Task task : tasks) {
+          if (task.isCompleted()) {
+            completedTasks += 1;
+          } else {
+            activeTasks += 1;
+          }
+        }
+        // The view may not be able to handle UI updates anymore
+        if (!mStatisticsView.isActive()) {
+          return;
+        }
+        mStatisticsView.setProgressIndicator(false);
 
-                mStatisticsView.showStatistics(activeTasks, completedTasks);
-            }
+        mStatisticsView.showStatistics(activeTasks, completedTasks);
+      }
 
-            @Override
-            public void onDataNotAvailable() {
-                // The view may not be able to handle UI updates anymore
-                if (!mStatisticsView.isActive()) {
-                    return;
-                }
-                mStatisticsView.showLoadingStatisticsError();
-            }
-        });
-    }
+      @Override public void onDataNotAvailable() {
+        // The view may not be able to handle UI updates anymore
+        if (!mStatisticsView.isActive()) {
+          return;
+        }
+        mStatisticsView.showLoadingStatisticsError();
+      }
+    });
+  }
 }

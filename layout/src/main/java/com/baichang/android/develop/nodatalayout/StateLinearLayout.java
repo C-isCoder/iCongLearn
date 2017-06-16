@@ -34,8 +34,7 @@ public class StateLinearLayout extends LinearLayout implements OnClickListener {
     super(context, attrs, defStyleAttr);
   }
 
-  @Override
-  protected void onLayout(boolean changed, int l, int t, int r, int b) {
+  @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
     super.onLayout(changed, l, t, r, b);
     if (changed) {
       init();
@@ -69,9 +68,7 @@ public class StateLinearLayout extends LinearLayout implements OnClickListener {
     }
   }
 
-
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     if (listener != null) {
       listener.onRefresh();
     }

@@ -34,8 +34,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements OnCl
   private static LrcInfo mLrcInfo;
   private List<Long> mKeyList;
   private Handler myHandler = new Handler() {
-    @Override
-    public void handleMessage(Message msg) {
+    @Override public void handleMessage(Message msg) {
       if (player == null) {
         return;
       }
@@ -49,8 +48,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements OnCl
     }
   };
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_coordinator_layout);
     setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
@@ -89,8 +87,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements OnCl
     findViewById(R.id.fab_back).setOnClickListener(this);
   }
 
-  @Override
-  public void onClick(View view) {
+  @Override public void onClick(View view) {
     switch (view.getId()) {
       case R.id.fab_back:
         finish();
@@ -113,19 +110,16 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements OnCl
   }
 
   private TimerTask task = new TimerTask() {
-    @Override
-    public void run() {
+    @Override public void run() {
       myHandler.sendEmptyMessage(0);
     }
   };
 
-  @Override
-  protected void onDestroy() {
+  @Override protected void onDestroy() {
     super.onDestroy();
     myHandler.removeMessages(0);
     player.stop();
     player.release();
     player = null;
   }
-
 }

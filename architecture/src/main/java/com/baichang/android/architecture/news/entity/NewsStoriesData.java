@@ -11,14 +11,9 @@ import java.util.List;
 
 public class NewsStoriesData {
 
-  @Expose
-  public String title;
-  @Expose
-  public String ga_prefix;
-  @Expose
-  public List<String> images;
-  @Expose
-  public int type;
-  @Expose
-  public int id;
+  @Expose public String title;
+  @Expose public String ga_prefix;
+  @Expose public List<String> images;
+  @Expose public int type;
+  @Expose public int id;
 }

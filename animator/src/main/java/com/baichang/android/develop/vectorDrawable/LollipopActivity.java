@@ -11,19 +11,18 @@ import com.baichang.android.develop.R;
 
 public class LollipopActivity extends AppCompatActivity {
 
-   @Override
-   protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_lollipop);
-   }
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_lollipop);
+  }
 
-   @TargetApi(VERSION_CODES.LOLLIPOP)
-   public void anim(View view) {
-      ImageView imageView = (ImageView) view;
-      AnimatedVectorDrawable drawable = (AnimatedVectorDrawable) getDrawable(R.drawable.fivestar_anim_vector);
-      imageView.setImageDrawable(drawable);
-      if (drawable != null) {
-         drawable.start();
-      }
-   }
+  @TargetApi(VERSION_CODES.LOLLIPOP) public void anim(View view) {
+    ImageView imageView = (ImageView) view;
+    AnimatedVectorDrawable drawable =
+        (AnimatedVectorDrawable) getDrawable(R.drawable.fivestar_anim_vector);
+    imageView.setImageDrawable(drawable);
+    if (drawable != null) {
+      drawable.start();
+    }
+  }
 }

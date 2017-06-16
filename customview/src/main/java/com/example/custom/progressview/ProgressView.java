@@ -56,7 +56,8 @@ public class ProgressView extends View {
   }
 
   private void init(AttributeSet attrs, int defStyle) {
-    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView, defStyle, 0);
+    TypedArray a =
+        getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView, defStyle, 0);
     String text = a.getString(R.styleable.ProgressView_text);
     if (!TextUtils.isEmpty(text)) {
       mText = text;
@@ -104,9 +105,7 @@ public class ProgressView extends View {
     mArcRect = new RectF();
   }
 
-
-  @Override
-  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+  @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     int widthMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -136,9 +135,7 @@ public class ProgressView extends View {
     invalidate();
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  @Override
-  protected void onDraw(Canvas canvas) {
+  @TargetApi(Build.VERSION_CODES.LOLLIPOP) @Override protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
 
     int paddingLeft = getPaddingLeft();

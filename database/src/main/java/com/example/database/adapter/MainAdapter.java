@@ -23,12 +23,12 @@ public class MainAdapter extends RealmBaseAdapter<User> {
     super.updateData(list);
   }
 
-  @Override
-  public View getView(int i, View view, ViewGroup viewGroup) {
+  @Override public View getView(int i, View view, ViewGroup viewGroup) {
     Holder holder;
     if (view == null) {
       holder = new Holder();
-      view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_layout, viewGroup, false);
+      view = LayoutInflater.from(viewGroup.getContext())
+          .inflate(R.layout.item_layout, viewGroup, false);
       holder.tvId = (TextView) view.findViewById(R.id.item_tv_id);
       holder.tvName = (TextView) view.findViewById(R.id.item_tv_name);
       holder.tvAge = (TextView) view.findViewById(R.id.item_tv_age);

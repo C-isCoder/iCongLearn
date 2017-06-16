@@ -10,34 +10,30 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WebViewActivity extends AppCompatActivity {
-    @BindView(R.id.web_view)
-    BCHttpsWebView mWebView;
+  @BindView(R.id.web_view) BCHttpsWebView mWebView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_view);
-        ButterKnife.bind(this);
-        initView();
-    }
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_web_view);
+    ButterKnife.bind(this);
+    initView();
+  }
 
-    private void initView() {
-        mWebView.loadUrl("https://www.baidu.com");
-    }
+  private void initView() {
+    mWebView.loadUrl("https://www.baidu.com");
+  }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mWebView != null) {
-            mWebView.onPause();
-        }
+  @Override protected void onPause() {
+    super.onPause();
+    if (mWebView != null) {
+      mWebView.onPause();
     }
+  }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mWebView != null) {
-            mWebView.destroy();
-        }
+  @Override protected void onDestroy() {
+    super.onDestroy();
+    if (mWebView != null) {
+      mWebView.destroy();
     }
+  }
 }

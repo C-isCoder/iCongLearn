@@ -10,18 +10,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HttpsWebViewActivity extends CommonActivity {
-    @BindView(R.id.web_view)
-    BCHttpsWebView mWebView;
+  @BindView(R.id.web_view) BCHttpsWebView mWebView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_https_web_view);
-        ButterKnife.bind(this);
-        initView();
-    }
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_https_web_view);
+    ButterKnife.bind(this);
+    initView();
+  }
 
-    private void initView() {
-        mWebView.loadUrl("https://water.weiidu.com/inter/web/interface/view?projectId=8");
-    }
+  private void initView() {
+    mWebView.loadUrl("https://water.weiidu.com/inter/web/interface/view?projectId=8");
+  }
 }

@@ -34,22 +34,18 @@ public class NewsInteractionImpl implements NewsInteraction {
   public static final int NEWS_DETAIL = 1;
   public static final int NEWS_LIST = 2;
 
-  @Override
-  public void getNewsList(final BaseListener<ArrayList<NewsStoriesData>> listener) {
-    Subscription subscription = api.getList()
-        .subscribe(new Subscriber<BaseData<NewsStoriesData>>() {
-          @Override
-          public void onCompleted() {
+  @Override public void getNewsList(final BaseListener<ArrayList<NewsStoriesData>> listener) {
+    Subscription subscription =
+        api.getList().subscribe(new Subscriber<BaseData<NewsStoriesData>>() {
+          @Override public void onCompleted() {
 
           }
 
-          @Override
-          public void onError(Throwable e) {
+          @Override public void onError(Throwable e) {
             listener.error(e.getMessage());
           }
 
-          @Override
-          public void onNext(BaseData<NewsStoriesData> data) {
+          @Override public void onNext(BaseData<NewsStoriesData> data) {
             listener.success(data.stories);
           }
         });
@@ -57,30 +53,24 @@ public class NewsInteractionImpl implements NewsInteraction {
     map.put(NEWS_LIST, subscription);
   }
 
-  @Override
-  public void getNewsDetail(int newsId, final BaseListener<String> listener) {
-    Subscription subscription = api.getDetail(newsId)
-        .subscribe(new Subscriber<NewsDetailData>() {
-          @Override
-          public void onCompleted() {
+  @Override public void getNewsDetail(int newsId, final BaseListener<String> listener) {
+    Subscription subscription = api.getDetail(newsId).subscribe(new Subscriber<NewsDetailData>() {
+      @Override public void onCompleted() {
 
-          }
+      }
 
-          @Override
-          public void onError(Throwable e) {
-            listener.error(e.getMessage());
-          }
+      @Override public void onError(Throwable e) {
+        listener.error(e.getMessage());
+      }
 
-          @Override
-          public void onNext(NewsDetailData newsDetailData) {
-            listener.success(newsDetailData.body);
-          }
-        });
+      @Override public void onNext(NewsDetailData newsDetailData) {
+        listener.success(newsDetailData.body);
+      }
+    });
     map.put(NEWS_DETAIL, subscription);
   }
 
-  @Override
-  public void cancel(int key) {
+  @Override public void cancel(int key) {
     map.get(key).unsubscribe();
   }
 }

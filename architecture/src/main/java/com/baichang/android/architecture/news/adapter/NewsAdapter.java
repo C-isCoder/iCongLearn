@@ -31,36 +31,32 @@ public class NewsAdapter extends Adapter<NewsHolder> {
 
   private Context mContext;
 
-  @Override
-  public NewsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @Override public NewsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     mContext = parent.getContext();
     return new NewsHolder(LayoutInflater.from(mContext).inflate(R.layout.item_news_layout, null));
   }
 
-  @Override
-  public void onBindViewHolder(NewsHolder holder, int position) {
+  @Override public void onBindViewHolder(NewsHolder holder, int position) {
     holder.tvId.setText(mList.get(position).title);
-    Glide.with(mContext).load(mList.get(position).images.get(0)).error(R.mipmap.ic_launcher)
+    Glide.with(mContext)
+        .load(mList.get(position).images.get(0))
+        .error(R.mipmap.ic_launcher)
         .into(holder.ivImage);
   }
 
-  @Override
-  public int getItemCount() {
+  @Override public int getItemCount() {
     return mList == null ? 0 : mList.size();
   }
 
   public class NewsHolder extends ViewHolder {
 
-    @BindView(R.id.item_news_tv_title)
-    TextView tvId;
-    @BindView(R.id.item_news_iv_img)
-    ImageView ivImage;
+    @BindView(R.id.item_news_tv_title) TextView tvId;
+    @BindView(R.id.item_news_iv_img) ImageView ivImage;
 
     public NewsHolder(View itemView) {
       super(itemView);
       itemView.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
+        @Override public void onClick(View v) {
           if (listener != null) {
             listener.onClickItem(getAdapterPosition());
           }

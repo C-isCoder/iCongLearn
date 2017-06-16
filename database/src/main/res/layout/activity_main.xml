@@ -1,102 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:tools="http://schemas.android.com/tools"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   tools:context="com.example.database.activity.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.database.activity.MainActivity"
+    >
 
-   <LinearLayout
+  <LinearLayout
       android:id="@+id/btn_layout"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      >
 
-      <Button
-         android:id="@+id/btn_add"
-         android:layout_width="0dp"
-         android:layout_height="48dp"
-         android:layout_weight="1"
-         android:text="增"
-         android:textColor="@android:color/holo_green_dark" />
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:text="增"
+        android:textColor="@android:color/holo_green_dark"
+        />
 
-      <Button
-         android:id="@+id/btn_delete"
-         android:layout_width="0dp"
-         android:layout_height="48dp"
-         android:layout_weight="1"
-         android:text="删"
-         android:textColor="@android:color/holo_red_dark" />
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:text="删"
+        android:textColor="@android:color/holo_red_dark"
+        />
 
-      <Button
-         android:id="@+id/btn_change"
-         android:layout_width="0dp"
-         android:layout_height="48dp"
-         android:layout_weight="1"
-         android:text="改"
-         android:textColor="@android:color/holo_blue_dark" />
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:text="改"
+        android:textColor="@android:color/holo_blue_dark"
+        />
 
-      <Button
-         android:id="@+id/btn_find"
-         android:layout_width="0dp"
-         android:layout_height="48dp"
-         android:layout_weight="1"
-         android:text="查" />
+    <Button
+        android:id="@+id/btn_find"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:text="查"
+        />
 
-   </LinearLayout>
+  </LinearLayout>
 
-   <LinearLayout
+  <LinearLayout
       android:id="@+id/title_layout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
-      android:layout_below="@id/btn_layout">
+      android:layout_below="@id/btn_layout"
+      >
 
-      <TextView
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:layout_weight="1"
-         android:gravity="center"
-         android:text="ID"
-         android:textColor="@android:color/holo_orange_dark"
-         android:textSize="14sp" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="ID"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="14sp"
+        />
 
-      <TextView
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:layout_weight="1"
-         android:gravity="center"
-         android:text="姓名"
-         android:textColor="@android:color/holo_red_dark"
-         android:textSize="14sp" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="姓名"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
+        />
 
-      <TextView
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:layout_weight="1"
-         android:gravity="center"
-         android:text="年龄"
-         android:textColor="@android:color/holo_green_dark"
-         android:textSize="14sp" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="年龄"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="14sp"
+        />
 
-      <TextView
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:layout_weight="1"
-         android:gravity="center"
-         android:text="SessionID"
-         android:textColor="@android:color/holo_purple"
-         android:textSize="14sp" />
-   </LinearLayout>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="SessionID"
+        android:textColor="@android:color/holo_purple"
+        android:textSize="14sp"
+        />
+  </LinearLayout>
 
-   <ListView
+  <ListView
       android:id="@+id/list_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_below="@id/title_layout"
       android:divider="#2b2b2b"
       android:dividerHeight="0.1px"
-      android:scrollbars="none" />
+      android:scrollbars="none"
+      />
 
-   <TextView
+  <TextView
       android:id="@+id/tv_result"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -104,5 +116,6 @@
       android:lineSpacingExtra="4dp"
       android:layout_alignParentBottom="true"
       android:textColor="@android:color/holo_blue_dark"
-      android:textSize="8sp" />
+      android:textSize="8sp"
+      />
 </RelativeLayout>

@@ -15,8 +15,8 @@ import com.baichang.android.architecture.news.view.NewsDetailView;
  * C is a Coder
  */
 
-public class NewsDetailPresentImpl implements NewsDetailPresent,
-    NewsInteraction.BaseListener<String> {
+public class NewsDetailPresentImpl
+    implements NewsDetailPresent, NewsInteraction.BaseListener<String> {
 
   private NewsDetailView mView;
   private int newsId;
@@ -32,28 +32,23 @@ public class NewsDetailPresentImpl implements NewsDetailPresent,
     Log.e("MQ", mq.getTitle());
   }
 
-  @Override
-  public void onDestroy() {
+  @Override public void onDestroy() {
     mInteraction.cancel(NewsInteractionImpl.NEWS_DETAIL);
     mView = null;
   }
 
-  @Override
-  public void onStart() {
+  @Override public void onStart() {
     mView.showProgressBar();
     mInteraction.getNewsDetail(newsId, this);
   }
 
-  @Override
-  public void success(String s) {
+  @Override public void success(String s) {
     mView.hideProgressBar();
     mView.showWebView(s);
   }
 
-  @Override
-  public void error(String error) {
+  @Override public void error(String error) {
     mView.hideProgressBar();
     mView.showMessage(error);
   }
-
 }

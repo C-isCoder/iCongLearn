@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class BaseData<T> {
 
-  @Expose
-  public String date;
-  @Expose
-  public ArrayList<T> stories;
+  @Expose public String date;
+  @Expose public ArrayList<T> stories;
 }

@@ -37,8 +37,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
 
   private AddEditTaskPresenter mAddEditTaskPresenter;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.addtask_act);
 
@@ -66,8 +65,8 @@ public class AddEditTaskActivity extends AppCompatActivity {
         actionBar.setTitle(R.string.add_task);
       }
 
-      ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-          addEditTaskFragment, R.id.contentFrame);
+      ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), addEditTaskFragment,
+          R.id.contentFrame);
     }
 
     boolean shouldLoadDataFromRepo = true;
@@ -79,27 +78,21 @@ public class AddEditTaskActivity extends AppCompatActivity {
     }
 
     // Create the presenter
-    mAddEditTaskPresenter = new AddEditTaskPresenter(
-        taskId,
+    mAddEditTaskPresenter = new AddEditTaskPresenter(taskId,
         TasksRepository.getInstance(TasksRemoteDataSource.getInstance(),
-            TasksLocalDataSource.getInstance(this)),
-        addEditTaskFragment,
-        shouldLoadDataFromRepo);
+            TasksLocalDataSource.getInstance(this)), addEditTaskFragment, shouldLoadDataFromRepo);
 
     addEditTaskFragment.setPresenter(mAddEditTaskPresenter);
   }
 
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
+  @Override protected void onSaveInstanceState(Bundle outState) {
     // Save the state so that next time we know if we need to refresh data.
     outState.putBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY, mAddEditTaskPresenter.isDataMissing());
     super.onSaveInstanceState(outState);
   }
 
-  @Override
-  public boolean onSupportNavigateUp() {
+  @Override public boolean onSupportNavigateUp() {
     onBackPressed();
     return true;
   }
-
 }

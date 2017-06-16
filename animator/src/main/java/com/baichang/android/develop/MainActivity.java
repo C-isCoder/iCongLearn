@@ -11,24 +11,24 @@ import com.baichang.android.develop.vectorDrawable.VectorActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-   @Override
-   protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_main);
-   }
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+  }
 
-   public void value(View view) {
-      startActivity(new Intent(this, ValueAnimatorActivity.class));
-   }
+  public void value(View view) {
+    startActivity(new Intent(this, ValueAnimatorActivity.class));
+  }
 
-   public void spring(View view) {
-      startActivity(new Intent(this, SpringAnimatorActivity.class));
-   }
+  public void spring(View view) {
+    startActivity(new Intent(this, SpringAnimatorActivity.class));
+  }
 
-   public void vector(View view) {
-      startActivity(new Intent(this, VectorActivity.class));
-   }
-   public void bezier(View view) {
-      startActivity(new Intent(this, BezierActivity.class));
-   }
+  public void vector(View view) {
+    startActivity(new Intent(this, VectorActivity.class));
+  }
+
+  public void bezier(View view) {
+    startActivity(new Intent(this, BezierActivity.class));
+  }
 }

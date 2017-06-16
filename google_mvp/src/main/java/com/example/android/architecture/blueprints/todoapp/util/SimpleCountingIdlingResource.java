@@ -25,39 +25,39 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public final class SimpleCountingIdlingResource {
 
-    private final String mResourceName;
+  private final String mResourceName;
 
-    private final AtomicInteger counter = new AtomicInteger(0);
+  private final AtomicInteger counter = new AtomicInteger(0);
 
-    // written from main thread, read from any thread.
+  // written from main thread, read from any thread.
 
-    /**
-     * Creates a SimpleCountingIdlingResource
-     *
-     * @param resourceName the resource name this resource should report to Espresso.
-     */
-    public SimpleCountingIdlingResource(String resourceName) {
-        mResourceName = resourceName;
+  /**
+   * Creates a SimpleCountingIdlingResource
+   *
+   * @param resourceName the resource name this resource should report to Espresso.
+   */
+  public SimpleCountingIdlingResource(String resourceName) {
+    mResourceName = resourceName;
+  }
+
+  /**
+   * Increments the count of in-flight transactions to the resource being monitored.
+   */
+  public void increment() {
+    counter.getAndIncrement();
+  }
+
+  /**
+   * Decrements the count of in-flight transactions to the resource being monitored.
+   *
+   * If this operation results in the counter falling below 0 - an exception is raised.
+   *
+   * @throws IllegalStateException if the counter is below 0.
+   */
+  public void decrement() {
+    int counterVal = counter.decrementAndGet();
+    if (counterVal < 0) {
+      throw new IllegalArgumentException("Counter has been corrupted!");
     }
-
-    /**
-     * Increments the count of in-flight transactions to the resource being monitored.
-     */
-    public void increment() {
-        counter.getAndIncrement();
-    }
-
-    /**
-     * Decrements the count of in-flight transactions to the resource being monitored.
-     *
-     * If this operation results in the counter falling below 0 - an exception is raised.
-     *
-     * @throws IllegalStateException if the counter is below 0.
-     */
-    public void decrement() {
-        int counterVal = counter.decrementAndGet();
-        if (counterVal < 0) {
-            throw new IllegalArgumentException("Counter has been corrupted!");
-        }
-    }
+  }
 }

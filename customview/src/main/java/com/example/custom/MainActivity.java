@@ -14,23 +14,20 @@ public class MainActivity extends AppCompatActivity {
   private ProgressView progressView;
   private int count = 0;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     progressView = (ProgressView) findViewById(R.id.progress_view);
   }
 
-  @Override
-  protected void onResume() {
+  @Override protected void onResume() {
     super.onResume();
     Timer timer = new Timer();
     timer.schedule(task, 1000, 1000);
   }
 
   Handler myHandler = new Handler() {
-    @Override
-    public void handleMessage(Message msg) {
+    @Override public void handleMessage(Message msg) {
       progressView.setCurrentProgress(count);
       count++;
       if (count > 100) {
@@ -39,14 +36,12 @@ public class MainActivity extends AppCompatActivity {
     }
   };
   TimerTask task = new TimerTask() {
-    @Override
-    public void run() {
+    @Override public void run() {
       myHandler.sendEmptyMessage(0);
     }
   };
 
-  @Override
-  protected void onDestroy() {
+  @Override protected void onDestroy() {
     super.onDestroy();
     task.cancel();
     myHandler.removeMessages(0);

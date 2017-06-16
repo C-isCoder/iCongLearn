@@ -10,8 +10,6 @@ import java.io.Serializable;
  */
 
 public class UserData implements Serializable {
-    @Expose
-    public String token;
-    @Expose
-    public String stationId;
+  @Expose public String token;
+  @Expose public String stationId;
 }

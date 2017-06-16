@@ -24,25 +24,25 @@ import com.example.android.architecture.blueprints.todoapp.BaseView;
  */
 public interface AddEditTaskContract {
 
-    interface View extends BaseView<Presenter> {
+  interface View extends BaseView<Presenter> {
 
-        void showEmptyTaskError();
+    void showEmptyTaskError();
 
-        void showTasksList();
+    void showTasksList();
 
-        void setTitle(String title);
+    void setTitle(String title);
 
-        void setDescription(String description);
+    void setDescription(String description);
 
-        boolean isActive();
-    }
+    boolean isActive();
+  }
 
-    interface Presenter extends BasePresenter {
+  interface Presenter extends BasePresenter {
 
-        void saveTask(String title, String description);
+    void saveTask(String title, String description);
 
-        void populateTask();
+    void populateTask();
 
-        boolean isDataMissing();
-    }
+    boolean isDataMissing();
+  }
 }

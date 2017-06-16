@@ -24,41 +24,41 @@ import com.example.android.architecture.blueprints.todoapp.BaseView;
  */
 public interface TaskDetailContract {
 
-    interface View extends BaseView<Presenter> {
+  interface View extends BaseView<Presenter> {
 
-        void setLoadingIndicator(boolean active);
+    void setLoadingIndicator(boolean active);
 
-        void showMissingTask();
+    void showMissingTask();
 
-        void hideTitle();
+    void hideTitle();
 
-        void showTitle(String title);
+    void showTitle(String title);
 
-        void hideDescription();
+    void hideDescription();
 
-        void showDescription(String description);
+    void showDescription(String description);
 
-        void showCompletionStatus(boolean complete);
+    void showCompletionStatus(boolean complete);
 
-        void showEditTask(String taskId);
+    void showEditTask(String taskId);
 
-        void showTaskDeleted();
+    void showTaskDeleted();
 
-        void showTaskMarkedComplete();
+    void showTaskMarkedComplete();
 
-        void showTaskMarkedActive();
+    void showTaskMarkedActive();
 
-        boolean isActive();
-    }
+    boolean isActive();
+  }
 
-    interface Presenter extends BasePresenter {
+  interface Presenter extends BasePresenter {
 
-        void editTask();
+    void editTask();
 
-        void deleteTask();
+    void deleteTask();
 
-        void completeTask();
+    void completeTask();
 
-        void activateTask();
-    }
+    void activateTask();
+  }
 }

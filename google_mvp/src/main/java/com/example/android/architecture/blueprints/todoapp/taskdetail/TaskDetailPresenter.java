@@ -16,7 +16,6 @@
 
 package com.example.android.architecture.blueprints.todoapp.taskdetail;
 
-
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -34,11 +33,9 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
 
   private final TaskDetailContract.View mTaskDetailView;
 
-  @Nullable
-  private String mTaskId;
+  @Nullable private String mTaskId;
 
-  public TaskDetailPresenter(@Nullable String taskId,
-      @NonNull TasksRepository tasksRepository,
+  public TaskDetailPresenter(@Nullable String taskId, @NonNull TasksRepository tasksRepository,
       @NonNull TaskDetailContract.View taskDetailView) {
     mTaskId = taskId;
     mTasksRepository = tasksRepository;
@@ -46,8 +43,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
     mTaskDetailView.setPresenter(this);
   }
 
-  @Override
-  public void start() {
+  @Override public void start() {
     openTask();
   }
 
@@ -59,8 +55,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
 
     mTaskDetailView.setLoadingIndicator(true);
     mTasksRepository.getTask(mTaskId, new TasksDataSource.GetTaskCallback() {
-      @Override
-      public void onTaskLoaded(Task task) {
+      @Override public void onTaskLoaded(Task task) {
         // The view may not be able to handle UI updates anymore
         if (!mTaskDetailView.isActive()) {
           return;
@@ -73,8 +68,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
         }
       }
 
-      @Override
-      public void onDataNotAvailable() {
+      @Override public void onDataNotAvailable() {
         // The view may not be able to handle UI updates anymore
         if (!mTaskDetailView.isActive()) {
           return;
@@ -84,8 +78,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
     });
   }
 
-  @Override
-  public void editTask() {
+  @Override public void editTask() {
     if (TextUtils.isEmpty(mTaskId)) {
       mTaskDetailView.showMissingTask();
       return;
@@ -93,8 +86,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
     mTaskDetailView.showEditTask(mTaskId);
   }
 
-  @Override
-  public void deleteTask() {
+  @Override public void deleteTask() {
     if (TextUtils.isEmpty(mTaskId)) {
       mTaskDetailView.showMissingTask();
       return;
@@ -103,8 +95,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
     mTaskDetailView.showTaskDeleted();
   }
 
-  @Override
-  public void completeTask() {
+  @Override public void completeTask() {
     if (TextUtils.isEmpty(mTaskId)) {
       mTaskDetailView.showMissingTask();
       return;
@@ -113,8 +104,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
     mTaskDetailView.showTaskMarkedComplete();
   }
 
-  @Override
-  public void activateTask() {
+  @Override public void activateTask() {
     if (TextUtils.isEmpty(mTaskId)) {
       mTaskDetailView.showMissingTask();
       return;

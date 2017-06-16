@@ -7,9 +7,8 @@ import com.baichang.library.test.base.CommonActivity;
 
 public class CircleRoundActivity extends CommonActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_circle_round);
-    }
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_circle_round);
+  }
 }

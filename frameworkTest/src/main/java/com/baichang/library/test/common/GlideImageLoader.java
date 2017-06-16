@@ -14,8 +14,10 @@ import com.bumptech.glide.Glide;
  */
 
 public class GlideImageLoader extends ImageLoader {
-    @Override
-    public void displayImage(Context context, Object path, ImageView imageView) {
-        Glide.with(context).load(APIConstants.API_LOAD_IMAGE + path).error(R.mipmap.ic_launcher).into(imageView);
-    }
+  @Override public void displayImage(Context context, Object path, ImageView imageView) {
+    Glide.with(context)
+        .load(APIConstants.API_LOAD_IMAGE + path)
+        .error(R.mipmap.ic_launcher)
+        .into(imageView);
+  }
 }

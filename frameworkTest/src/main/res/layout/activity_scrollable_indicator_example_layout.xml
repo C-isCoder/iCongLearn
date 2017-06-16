@@ -3,80 +3,93 @@
     android:layout_width="match_parent"
     android:paddingTop="20dp"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <ScrollView
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:fadeScrollbars="false"
+      >
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fadeScrollbars="false">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+      <com.baichang.android.widget.magicIndicator.MagicIndicator
+          android:id="@+id/magic_indicator1"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/common_navigator_height"
+          android:layout_marginTop="@dimen/navigator_margin_top"
+          />
 
-            <com.baichang.android.widget.magicIndicator.MagicIndicator
-                android:id="@+id/magic_indicator1"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_navigator_height"
-                android:layout_marginTop="@dimen/navigator_margin_top" />
+      <com.baichang.android.widget.magicIndicator.MagicIndicator
+          android:id="@+id/magic_indicator2"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/common_navigator_height"
+          android:layout_marginTop="@dimen/navigator_margin_top"
+          />
 
-            <com.baichang.android.widget.magicIndicator.MagicIndicator
-                android:id="@+id/magic_indicator2"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_navigator_height"
-                android:layout_marginTop="@dimen/navigator_margin_top" />
+      <com.baichang.android.widget.magicIndicator.MagicIndicator
+          android:id="@+id/magic_indicator3"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/common_navigator_height"
+          android:layout_marginTop="@dimen/navigator_margin_top"
+          />
 
-            <com.baichang.android.widget.magicIndicator.MagicIndicator
-                android:id="@+id/magic_indicator3"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_navigator_height"
-                android:layout_marginTop="@dimen/navigator_margin_top" />
+      <com.baichang.android.widget.magicIndicator.MagicIndicator
+          android:id="@+id/magic_indicator4"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/common_navigator_height"
+          android:layout_marginTop="@dimen/navigator_margin_top"
+          />
 
-            <com.baichang.android.widget.magicIndicator.MagicIndicator
-                android:id="@+id/magic_indicator4"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_navigator_height"
-                android:layout_marginTop="@dimen/navigator_margin_top" />
+      <com.baichang.android.widget.magicIndicator.MagicIndicator
+          android:id="@+id/magic_indicator5"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/common_navigator_height"
+          android:layout_marginTop="@dimen/navigator_margin_top"
+          />
 
-            <com.baichang.android.widget.magicIndicator.MagicIndicator
-                android:id="@+id/magic_indicator5"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_navigator_height"
-                android:layout_marginTop="@dimen/navigator_margin_top" />
+      <com.baichang.android.widget.magicIndicator.MagicIndicator
+          android:id="@+id/magic_indicator6"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/common_navigator_height"
+          android:layout_marginTop="@dimen/navigator_margin_top"
+          />
 
-            <com.baichang.android.widget.magicIndicator.MagicIndicator
-                android:id="@+id/magic_indicator6"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_navigator_height"
-                android:layout_marginTop="@dimen/navigator_margin_top" />
+      <com.baichang.android.widget.magicIndicator.MagicIndicator
+          android:id="@+id/magic_indicator7"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/common_navigator_height"
+          android:layout_marginTop="@dimen/navigator_margin_top"
+          />
 
-            <com.baichang.android.widget.magicIndicator.MagicIndicator
-                android:id="@+id/magic_indicator7"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_navigator_height"
-                android:layout_marginTop="@dimen/navigator_margin_top" />
+      <com.baichang.android.widget.magicIndicator.MagicIndicator
+          android:id="@+id/magic_indicator8"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/common_navigator_height"
+          android:layout_marginTop="@dimen/navigator_margin_top"
+          />
 
-            <com.baichang.android.widget.magicIndicator.MagicIndicator
-                android:id="@+id/magic_indicator8"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_navigator_height"
-                android:layout_marginTop="@dimen/navigator_margin_top" />
+      <com.baichang.android.widget.magicIndicator.MagicIndicator
+          android:id="@+id/magic_indicator9"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/common_navigator_height"
+          android:layout_marginTop="@dimen/navigator_margin_top"
+          />
 
-            <com.baichang.android.widget.magicIndicator.MagicIndicator
-                android:id="@+id/magic_indicator9"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_navigator_height"
-                android:layout_marginTop="@dimen/navigator_margin_top" />
+    </LinearLayout>
 
-        </LinearLayout>
+  </ScrollView>
 
-    </ScrollView>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
+  <android.support.v4.view.ViewPager
+      android:id="@+id/view_pager"
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      />
 
 </LinearLayout>

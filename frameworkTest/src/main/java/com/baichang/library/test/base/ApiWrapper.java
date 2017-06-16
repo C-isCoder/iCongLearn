@@ -23,19 +23,15 @@ import rx.Observable;
 
 public class ApiWrapper implements Api {
 
-  @Override
-  public Observable<List<String>> upload(@Part MultipartBody.Part file) {
+  @Override public Observable<List<String>> upload(@Part MultipartBody.Part file) {
     return HttpFactory.creatUpload(Api.class).upload(file);
   }
 
-  @Override
-  public Observable<List<String>> uploads(@Part List<MultipartBody.Part> files) {
+  @Override public Observable<List<String>> uploads(@Part List<MultipartBody.Part> files) {
     return HttpFactory.creatUpload(Api.class).uploads(files);
   }
 
-
-  @Override
-  public Observable<ResponseBody> download(@Url String fileUrl) {
+  @Override public Observable<ResponseBody> download(@Url String fileUrl) {
     //下载不需要设置线程，底层已经设置
     return HttpFactory.creatDownload(Api.class).download(fileUrl);
   }
@@ -46,13 +42,11 @@ public class ApiWrapper implements Api {
     return HttpFactory.creatHttp(Api.class).getInformationList(map);
   }
 
-  @Override
-  public Observable<UserData> login(@Body Map<String, String> map) {
+  @Override public Observable<UserData> login(@Body Map<String, String> map) {
     return HttpFactory.creatHttp(Api.class).login(map);
   }
 
   private Api getRequest() {
     return HttpFactory.creatHttp(Api.class);
   }
-
 }

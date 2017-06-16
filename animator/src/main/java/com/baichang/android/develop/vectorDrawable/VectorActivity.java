@@ -15,25 +15,24 @@ import com.baichang.android.develop.R;
 
 public class VectorActivity extends AppCompatActivity {
 
-   @Override
-   protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_verctor);
-   }
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_verctor);
+  }
 
-   public void anim(View view) {
-      ImageView imageView = (ImageView) view;
-      Drawable drawable = imageView.getDrawable();
-      if (drawable instanceof Animatable) {
-         ((Animatable) drawable).start();
-      }
-   }
+  public void anim(View view) {
+    ImageView imageView = (ImageView) view;
+    Drawable drawable = imageView.getDrawable();
+    if (drawable instanceof Animatable) {
+      ((Animatable) drawable).start();
+    }
+  }
 
-   public void startToL(View view){
-      if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP){
-         startActivity(new Intent(this,LollipopActivity.class));
-      }else {
-         Toast.makeText(this,"该设备不支持，路径动画 L plus",Toast.LENGTH_SHORT).show();
-      }
-   }
+  public void startToL(View view) {
+    if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+      startActivity(new Intent(this, LollipopActivity.class));
+    } else {
+      Toast.makeText(this, "该设备不支持，路径动画 L plus", Toast.LENGTH_SHORT).show();
+    }
+  }
 }

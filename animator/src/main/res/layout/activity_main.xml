@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:tools="http://schemas.android.com/tools"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:padding="16dp"
-   android:orientation="vertical"
-   tools:context="com.baichang.android.develop.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    tools:context="com.baichang.android.develop.MainActivity"
+    >
 
-   <Button
+  <Button
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="value"
-      android:text="ValueAnimatorActivity" />
+      android:text="ValueAnimatorActivity"
+      />
 
-   <Button
+  <Button
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="spring"
-      android:text="SpringAnimatorActivity" />
+      android:text="SpringAnimatorActivity"
+      />
 
-   <Button
+  <Button
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="vector"
-      android:text="VectorDrawableActivity" />
+      android:text="VectorDrawableActivity"
+      />
 
-   <Button
+  <Button
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="bezier"
-      android:text="BezierActivity" />
+      android:text="BezierActivity"
+      />
 </LinearLayout>

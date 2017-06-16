@@ -1,23 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:app="http://schemas.android.com/apk/res-auto"
-   xmlns:tools="http://schemas.android.com/tools"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:padding="16dp"
-   android:orientation="vertical"
-   tools:context="com.baichang.android.develop.bezier.BezierActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.baichang.android.develop.bezier.BezierActivity"
+    >
 
-   <Button
+  <Button
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="secondBezier"
-      android:text="二阶贝塞尔曲线" />
+      android:text="二阶贝塞尔曲线"
+      />
 
-   <Button
+  <Button
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
       android:onClick="thirdBezier"
-      android:text="三阶贝塞尔曲线" />
+      android:text="三阶贝塞尔曲线"
+      />
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:onClick="drawPadBezier"
+      android:text="两点连线的圆滑处理（画板）"
+      />
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:onClick="pathMorphingBezier"
+      android:text="路径变换动画"
+      />
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:onClick="waveBezier"
+      android:text="水波纹动画"
+      />
 </LinearLayout>

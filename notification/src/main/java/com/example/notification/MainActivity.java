@@ -17,8 +17,7 @@ public class MainActivity extends AppCompatActivity {
   private int notifyId = 1;
   private NotificationManager mManger;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     // init notification
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     builder.setPriority(Notification.PRIORITY_HIGH);
     // 设置通知震动模式
     // 延迟200毫秒震动3s，再延迟400毫秒震动1s
-    long[] pattern = new long[]{200, 3000, 400, 1000};
+    long[] pattern = new long[] { 200, 3000, 400, 1000 };
     //builder.setVibrate(pattern);
     // 自定义呼吸灯
     int argb = 0xffff0000; // led灯光颜色
@@ -75,5 +74,4 @@ public class MainActivity extends AppCompatActivity {
   public void cancel(View view) {
     mManger.cancel(notifyId);
   }
-
 }

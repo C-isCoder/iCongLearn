@@ -25,8 +25,7 @@ public class ValueAnimatorActivity extends AppCompatActivity {
   private ImageView ivArrow;
   private float currentCount = 0;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_value_animator);
     initView();
@@ -44,8 +43,7 @@ public class ValueAnimatorActivity extends AppCompatActivity {
     pointAnimator = (PointAnimator) findViewById(R.id.point_animator);
     ivArrow = (ImageView) findViewById(R.id.iv_arrow);
     ivArrow.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View view) {
+      @Override public void onClick(View view) {
         currentCount += 90;
         ivArrow.animate()
             .scaleX(2f)
@@ -53,8 +51,7 @@ public class ValueAnimatorActivity extends AppCompatActivity {
             .rotation(currentCount)
             .setDuration(300)
             .setListener(new AnimatorListenerAdapter() {
-              @Override
-              public void onAnimationEnd(Animator animation) {
+              @Override public void onAnimationEnd(Animator animation) {
                 ivArrow.animate().scaleX(1f).scaleY(1f).setDuration(300);
               }
             });
@@ -68,8 +65,7 @@ public class ValueAnimatorActivity extends AppCompatActivity {
     animator.setDuration(5000);
     //动画更新监听
     animator.addUpdateListener(new AnimatorUpdateListener() {
-      @Override
-      public void onAnimationUpdate(ValueAnimator valueAnimator) {
+      @Override public void onAnimationUpdate(ValueAnimator valueAnimator) {
         //每次动画更新变化的值
         float value = (float) valueAnimator.getAnimatedValue();
         ivImage.setAlpha(value);
@@ -93,8 +89,8 @@ public class ValueAnimatorActivity extends AppCompatActivity {
     ObjectAnimator aRotation = ObjectAnimator.ofFloat(ivImage, "rotation", 0f, 360f);
     //平移
     float currentX = ivImage.getTranslationX();
-    ObjectAnimator aTranslationX = ObjectAnimator
-        .ofFloat(ivImage, "translationX", -1000f, currentX);
+    ObjectAnimator aTranslationX =
+        ObjectAnimator.ofFloat(ivImage, "translationX", -1000f, currentX);
     //缩放
     ObjectAnimator aScaleY = ObjectAnimator.ofFloat(ivImage, "scaleY", 1f, 2f, 1f);
     //playAnimator(aScaleY);
@@ -117,13 +113,11 @@ public class ValueAnimatorActivity extends AppCompatActivity {
     animatorSet.play(animator1).with(animator2).with(animator3).after(animator4);
     animatorSet.setDuration(5000);
     animatorSet.addListener(new AnimatorListenerAdapter() {
-      @Override
-      public void onAnimationStart(Animator animation) {
+      @Override public void onAnimationStart(Animator animation) {
         Toast.makeText(ValueAnimatorActivity.this, "动画开始", Toast.LENGTH_SHORT).show();
       }
 
-      @Override
-      public void onAnimationEnd(Animator animation) {
+      @Override public void onAnimationEnd(Animator animation) {
         Toast.makeText(ValueAnimatorActivity.this, "动画结束", Toast.LENGTH_SHORT).show();
       }
     });
@@ -139,8 +133,8 @@ public class ValueAnimatorActivity extends AppCompatActivity {
 
   //自定义动画
   private void ColorEvaluator() {
-    ObjectAnimator animator = ObjectAnimator
-        .ofObject(pointAnimator, "color", new ColorEvaluator(), "#0000FF", "#FF0000");
+    ObjectAnimator animator =
+        ObjectAnimator.ofObject(pointAnimator, "color", new ColorEvaluator(), "#0000FF", "#FF0000");
     animator.setDuration(5000);
     animator.start();
   }

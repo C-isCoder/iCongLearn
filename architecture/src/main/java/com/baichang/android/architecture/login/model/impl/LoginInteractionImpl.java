@@ -8,13 +8,10 @@ import com.baichang.android.architecture.login.model.LoginInteraction;
 
 public class LoginInteractionImpl implements LoginInteraction {
 
-
-  @Override
-  public void Login(final String name, final String pw, final BaseListener listener) {
+  @Override public void Login(final String name, final String pw, final BaseListener listener) {
     //模拟子线程耗时操作
     new Thread() {
-      @Override
-      public void run() {
+      @Override public void run() {
         try {
           Thread.sleep(1000);
         } catch (InterruptedException e) {

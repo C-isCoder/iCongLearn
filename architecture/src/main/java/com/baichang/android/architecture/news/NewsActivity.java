@@ -17,14 +17,11 @@ import com.baichang.android.architecture.news.view.NewsView;
 
 public class NewsActivity extends BaseActivity implements NewsView {
 
-  @BindView(R.id.news_rv_list)
-  RecyclerView rvList;
-  @BindView(R.id.news_bar)
-  ProgressBar newsBar;
+  @BindView(R.id.news_rv_list) RecyclerView rvList;
+  @BindView(R.id.news_bar) ProgressBar newsBar;
   private NewsPresent mPresent;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_news);
     ButterKnife.bind(this);
@@ -37,37 +34,29 @@ public class NewsActivity extends BaseActivity implements NewsView {
     mPresent.attachRecyclerView(rvList);
   }
 
-
-  @Override
-  public void showProgressBar() {
+  @Override public void showProgressBar() {
     newsBar.setVisibility(View.VISIBLE);
   }
 
-  @Override
-  public void hideProgressBar() {
+  @Override public void hideProgressBar() {
     newsBar.setVisibility(View.GONE);
   }
 
-  @Override
-  public void showMessage(String msg) {
+  @Override public void showMessage(String msg) {
     showToast(msg);
   }
 
-
-  @Override
-  protected void onStart() {
+  @Override protected void onStart() {
     super.onStart();
     mPresent.onStart();
   }
 
-  @Override
-  protected void onDestroy() {
+  @Override protected void onDestroy() {
     super.onDestroy();
     mPresent.onDestroy();
   }
 
-  @Override
-  public void gotoDetail(int newsId) {
+  @Override public void gotoDetail(int newsId) {
     Intent intent = new Intent(this, NewsDetailActivity.class);
     intent.putExtra(FLAG.ACTION_NEWS_ID, newsId);
     startActivity(intent);

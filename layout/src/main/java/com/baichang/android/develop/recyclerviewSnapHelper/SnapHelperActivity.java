@@ -17,12 +17,12 @@ import com.baichang.android.develop.R;
 
 public class SnapHelperActivity extends AppCompatActivity {
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_snap_helper);
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+    recyclerView.setLayoutManager(
+        new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     recyclerView.setAdapter(new MyAdapter());
     LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
     linearSnapHelper.attachToRecyclerView(recyclerView);
@@ -30,30 +30,27 @@ public class SnapHelperActivity extends AppCompatActivity {
     //pagerSnapHelper.attachToRecyclerView(recyclerView);
   }
 
-
   class MyAdapter extends Adapter<MyHolder> {
 
-    private int[] images = new int[]{R.mipmap.far, R.mipmap.images1,
-        R.mipmap.images2, R.mipmap.images3, R.mipmap.images4};
-    private String[] strings = new String[]{"陈一发儿", "童话镇", "阿婆说",
-        "67373人均XX", "陈工"};
+    private int[] images = new int[] {
+        R.mipmap.far, R.mipmap.images1, R.mipmap.images2, R.mipmap.images3, R.mipmap.images4
+    };
+    private String[] strings = new String[] {
+        "陈一发儿", "童话镇", "阿婆说", "67373人均XX", "陈工"
+    };
 
-    @Override
-    public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-      return new MyHolder(
-          LayoutInflater.from(parent.getContext()).inflate(
-              R.layout.item_snaphelper_layout, parent, false));
+    @Override public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+      return new MyHolder(LayoutInflater.from(parent.getContext())
+          .inflate(R.layout.item_snaphelper_layout, parent, false));
     }
 
-    @Override
-    public void onBindViewHolder(MyHolder holder, int position) {
+    @Override public void onBindViewHolder(MyHolder holder, int position) {
       int finalPos = position % images.length;
       holder.ivImage.setImageResource(images[finalPos]);
       holder.tvText.setText(strings[finalPos]);
     }
 
-    @Override
-    public int getItemCount() {
+    @Override public int getItemCount() {
       return Integer.MAX_VALUE;
     }
   }
@@ -69,5 +66,4 @@ public class SnapHelperActivity extends AppCompatActivity {
       ivImage = (ImageView) itemView.findViewById(R.id.item_image_view);
     }
   }
-
 }

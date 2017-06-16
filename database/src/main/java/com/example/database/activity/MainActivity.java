@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
   private RealmAsyncTask mRealmAsyncTask;
   private SharedPreferences mPreferences;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     mPreferences = getSharedPreferences(MainActivity.class.getSimpleName(), MODE_PRIVATE);
@@ -62,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
       return;
     }
     mRealmAsyncTask = mRealm.executeTransactionAsync(new Transaction() {
-      @Override
-      public void execute(Realm realm) {
+      @Override public void execute(Realm realm) {
         ArrayList<User> users = Util.getTestData();
         for (User user : users) {
           User realmUser = realm.createObject(User.class);
@@ -74,14 +72,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
       }
     }, new OnSuccess() {
-      @Override
-      public void onSuccess() {
+      @Override public void onSuccess() {
         printResult("init db success");
         mPreferences.edit().putBoolean("first", true).apply();
       }
     }, new OnError() {
-      @Override
-      public void onError(Throwable error) {
+      @Override public void onError(Throwable error) {
         printResult("init db error: " + error.toString());
       }
     });
@@ -222,8 +218,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     return users;
   }
 
-  @Override
-  public void onClick(View view) {
+  @Override public void onClick(View view) {
     switch (view.getId()) {
       case R.id.btn_add:
         User user = Util.createUser();
@@ -258,7 +253,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
   }
 
-
   /**
    * change result on UI
    */
@@ -266,8 +260,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     tvResult.setText("执行结果:" + text);
   }
 
-  @Override
-  protected void onDestroy() {
+  @Override protected void onDestroy() {
     super.onDestroy();
     if (mRealmAsyncTask != null) {
       mRealmAsyncTask.cancel();

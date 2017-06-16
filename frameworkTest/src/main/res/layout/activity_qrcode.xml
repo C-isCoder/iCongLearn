@@ -5,26 +5,29 @@
     android:background="@android:color/white"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    >
 
-    <Button
-        android:id="@+id/test_scan_qrcode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:minHeight="48dp"
-        android:text="测试扫描二维码"
-        android:textColor="@color/cm_white"
-        android:textSize="@dimen/button_text_size" />
+  <Button
+      android:id="@+id/test_scan_qrcode"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:minHeight="48dp"
+      android:text="测试扫描二维码"
+      android:textColor="@color/cm_white"
+      android:textSize="@dimen/button_text_size"
+      />
 
-    <Button
-        android:id="@+id/test_generate_qrcode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:minHeight="48dp"
-        android:text="测试生成和识别图片二维码"
-        android:textColor="@color/cm_white"
-        android:textSize="@dimen/button_text_size" />
+  <Button
+      android:id="@+id/test_generate_qrcode"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:minHeight="48dp"
+      android:text="测试生成和识别图片二维码"
+      android:textColor="@color/cm_white"
+      android:textSize="@dimen/button_text_size"
+      />
 
 </LinearLayout>

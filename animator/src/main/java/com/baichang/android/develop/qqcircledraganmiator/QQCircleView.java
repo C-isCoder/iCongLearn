@@ -65,18 +65,18 @@ public class QQCircleView extends View {
     mPaint.setColor(Color.RED);
   }
 
-  @Override
-  protected void onDraw(Canvas canvas) {
+  @Override protected void onDraw(Canvas canvas) {
     // 获得两个圆心之间临时的距离
-    float distance = (float) (Math.sqrt(Math.pow(circle_B_Center_PointF.y - circle_A_Center_PointF.y, 2)) + Math
-        .pow(circle_B_Center_PointF.x - circle_A_Center_PointF.x, 2));
+    float distance =
+        (float) (Math.sqrt(Math.pow(circle_B_Center_PointF.y - circle_A_Center_PointF.y, 2))
+            + Math.pow(circle_B_Center_PointF.x - circle_A_Center_PointF.x, 2));
     distance = Math.min(distance, mMaxDistance);
 
     // A圆随着距离变大，大小逐渐缩小的计算
     float percent = distance / mMaxDistance;
     float circle_A_Radius_percentCahnge =
-        ((Number) circle_A_Radius).floatValue() + percent * (((Number) (circle_A_Radius * 0.2f)).floatValue()
-            - ((Number) circle_A_Radius).floatValue());
+        ((Number) circle_A_Radius).floatValue() + percent * (((Number) (circle_A_Radius
+            * 0.2f)).floatValue() - ((Number) circle_A_Radius).floatValue());
 
     // A，B圆之间的偏移量
     float yOffset = circle_A_Center_PointF.y - circle_B_Center_PointF.y;
@@ -90,7 +90,8 @@ public class QQCircleView extends View {
 
     // 求两个点的集合
     circle_B_PointFs = getIntersectionPoints(circle_B_Center_PointF, circle_B_Radius, lineK);
-    circle_A_PointFs = getIntersectionPoints(circle_A_Center_PointF, circle_A_Radius_percentCahnge, lineK);
+    circle_A_PointFs =
+        getIntersectionPoints(circle_A_Center_PointF, circle_A_Radius_percentCahnge, lineK);
 
     //通过公式求得贝塞尔曲线控制点
     mControlPointF = new PointF((circle_A_Center_PointF.x + circle_B_Center_PointF.x) / 2.0f,
@@ -101,20 +102,22 @@ public class QQCircleView extends View {
       if (!isOutRange) {
         Path path = new Path();
         path.moveTo(circle_A_PointFs[0].x, circle_A_PointFs[0].y);
-        path.quadTo(mControlPointF.x, mControlPointF.y, circle_B_PointFs[0].x, circle_B_PointFs[0].y);
+        path.quadTo(mControlPointF.x, mControlPointF.y, circle_B_PointFs[0].x,
+            circle_B_PointFs[0].y);
         path.lineTo(circle_B_PointFs[1].x, circle_B_PointFs[1].y);
-        path.quadTo(mControlPointF.x, mControlPointF.y, circle_A_PointFs[1].x, circle_A_PointFs[1].y);
+        path.quadTo(mControlPointF.x, mControlPointF.y, circle_A_PointFs[1].x,
+            circle_A_PointFs[1].y);
         path.close();
 
         canvas.drawPath(path, mPaint);
-        canvas.drawCircle(circle_B_Center_PointF.x, circle_B_Center_PointF.y, circle_B_Radius, mPaint);
+        canvas.drawCircle(circle_B_Center_PointF.x, circle_B_Center_PointF.y, circle_B_Radius,
+            mPaint);
       }
     }
     canvas.restore();
   }
 
-  @Override
-  public boolean onTouchEvent(MotionEvent event) {
+  @Override public boolean onTouchEvent(MotionEvent event) {
     int action = event.getAction();
     float downX = 0f;
     float downy = 0f;
@@ -134,8 +137,9 @@ public class QQCircleView extends View {
         invalidate();
 
         // 当超过最大值时断开
-        float distance = (float) Math.sqrt(Math.pow(circle_B_Center_PointF.y - circle_A_Center_PointF.y, 2) + Math
-            .pow(circle_B_Center_PointF.x - circle_A_Center_PointF.x, 2));
+        float distance = (float) Math.sqrt(
+            Math.pow(circle_B_Center_PointF.y - circle_A_Center_PointF.y, 2) + Math.pow(
+                circle_B_Center_PointF.x - circle_A_Center_PointF.x, 2));
         if (distance > mMaxDistance) {
           isOutRange = true;
           invalidate();
@@ -143,8 +147,9 @@ public class QQCircleView extends View {
         break;
       case MotionEvent.ACTION_CANCEL:
         if (isOutRange) {
-          distance = (float) Math.sqrt(Math.pow(circle_B_Center_PointF.y - circle_A_Center_PointF.y, 2) + Math
-              .pow(circle_B_Center_PointF.x - circle_A_Center_PointF.x, 2));
+          distance = (float) Math.sqrt(
+              Math.pow(circle_B_Center_PointF.y - circle_A_Center_PointF.y, 2) + Math.pow(
+                  circle_B_Center_PointF.x - circle_A_Center_PointF.x, 2));
           if (distance > mMaxDistance) {
             isDisappear = true;
             invalidate();
@@ -153,17 +158,17 @@ public class QQCircleView extends View {
             invalidate();
           }
         } else {
-          final PointF tempMovePointF = new PointF(circle_B_Center_PointF.x, circle_B_Center_PointF.y);
+          final PointF tempMovePointF =
+              new PointF(circle_B_Center_PointF.x, circle_B_Center_PointF.y);
           ValueAnimator animator = ValueAnimator.ofFloat(1.0f);
           animator.addUpdateListener(new AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
+            @Override public void onAnimationUpdate(ValueAnimator animation) {
               float percent = animation.getAnimatedFraction();
-              PointF pointF = new PointF(
-                  ((Number) (tempMovePointF.x)).floatValue() + (((Number) circle_A_Center_PointF.x).floatValue()
-                      - ((Number) (tempMovePointF.x)).floatValue()) * percent,
-                  ((Number) (tempMovePointF.y)).floatValue() + ((Number) (circle_A_Center_PointF.y)).floatValue()
-                      - ((Number) (tempMovePointF.y)).floatValue() * percent);
+              PointF pointF = new PointF(((Number) (tempMovePointF.x)).floatValue()
+                  + (((Number) circle_A_Center_PointF.x).floatValue()
+                  - ((Number) (tempMovePointF.x)).floatValue()) * percent,
+                  ((Number) (tempMovePointF.y)).floatValue() + ((Number) (circle_A_Center_PointF.y))
+                      .floatValue() - ((Number) (tempMovePointF.y)).floatValue() * percent);
               circle_B_Center_PointF.set(pointF.x, pointF.y);
               invalidate();
             }
@@ -195,6 +200,4 @@ public class QQCircleView extends View {
 
     return points;
   }
-
-
 }

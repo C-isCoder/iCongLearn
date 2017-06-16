@@ -16,20 +16,18 @@
 
 package com.example.android.architecture.blueprints.todoapp.util;
 
-
 public class EspressoIdlingResource {
 
-    private static final String RESOURCE = "GLOBAL";
+  private static final String RESOURCE = "GLOBAL";
 
-    private static SimpleCountingIdlingResource mCountingIdlingResource =
-            new SimpleCountingIdlingResource(RESOURCE);
+  private static SimpleCountingIdlingResource mCountingIdlingResource =
+      new SimpleCountingIdlingResource(RESOURCE);
 
-    public static void increment() {
-        mCountingIdlingResource.increment();
-    }
+  public static void increment() {
+    mCountingIdlingResource.increment();
+  }
 
-    public static void decrement() {
-        mCountingIdlingResource.decrement();
-    }
-
+  public static void decrement() {
+    mCountingIdlingResource.decrement();
+  }
 }

@@ -31,25 +31,24 @@ import android.view.View;
  */
 public class ScrollChildSwipeRefreshLayout extends SwipeRefreshLayout {
 
-    private View mScrollUpChild;
+  private View mScrollUpChild;
 
-    public ScrollChildSwipeRefreshLayout(Context context) {
-        super(context);
-    }
+  public ScrollChildSwipeRefreshLayout(Context context) {
+    super(context);
+  }
 
-    public ScrollChildSwipeRefreshLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+  public ScrollChildSwipeRefreshLayout(Context context, AttributeSet attrs) {
+    super(context, attrs);
+  }
 
-    @Override
-    public boolean canChildScrollUp() {
-        if (mScrollUpChild != null) {
-            return ViewCompat.canScrollVertically(mScrollUpChild, -1);
-        }
-        return super.canChildScrollUp();
+  @Override public boolean canChildScrollUp() {
+    if (mScrollUpChild != null) {
+      return ViewCompat.canScrollVertically(mScrollUpChild, -1);
     }
+    return super.canChildScrollUp();
+  }
 
-    public void setScrollUpChild(View view) {
-        mScrollUpChild = view;
-    }
+  public void setScrollUpChild(View view) {
+    mScrollUpChild = view;
+  }
 }

@@ -1,6 +1,5 @@
 package com.example.database.entity;
 
-
 import io.realm.RealmObject;
 import io.realm.annotations.Required;
 
@@ -50,8 +49,7 @@ public class User extends RealmObject {
     this.sessionId = sessionId;
   }
 
-  @Override
-  public String toString() {
+  @Override public String toString() {
     return "\nName: " + name + " Age: " + age + " Id: " + id + " SessionId: " + sessionId;
   }
 }

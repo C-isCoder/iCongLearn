@@ -25,19 +25,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Holder> {
     mViews = new SparseArray<>(list.length);
   }
 
-  @Override
-  public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-    return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false));
+  @Override public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+    return new Holder(
+        LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false));
   }
 
-  @Override
-  public void onBindViewHolder(Holder holder, int position) {
+  @Override public void onBindViewHolder(Holder holder, int position) {
     holder.tvFairy.setText(mList[position]);
     mViews.put(position, holder.tvFairy);
   }
 
-  @Override
-  public int getItemCount() {
+  @Override public int getItemCount() {
     return mList.length;
   }
 

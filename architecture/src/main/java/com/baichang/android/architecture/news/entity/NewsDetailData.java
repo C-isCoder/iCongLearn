@@ -10,14 +10,9 @@ import com.google.gson.annotations.Expose;
 
 public class NewsDetailData {
 
-  @Expose
-  public String body;
-  @Expose
-  public String image_source;
-  @Expose
-  public String title;
-  @Expose
-  public String image;
-  @Expose
-  public String share_url;
+  @Expose public String body;
+  @Expose public String image_source;
+  @Expose public String title;
+  @Expose public String image;
+  @Expose public String share_url;
 }

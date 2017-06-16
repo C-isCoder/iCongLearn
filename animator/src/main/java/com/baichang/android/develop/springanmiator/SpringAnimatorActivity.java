@@ -23,8 +23,7 @@ public class SpringAnimatorActivity extends AppCompatActivity {
   private SpringAnimation springAnimationTextView;
   private SpringAnimation springAnimationView;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_spring_animator);
     imageView = (ImageView) findViewById(R.id.image_view);
@@ -63,6 +62,5 @@ public class SpringAnimatorActivity extends AppCompatActivity {
     springAnimationTextView.cancel();
     springAnimationTextView.setStartValue(100);
     springAnimationTextView.start();
-
   }
 }

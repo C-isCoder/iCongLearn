@@ -1,1 +1,2 @@
-include ':animator', ':layout', ':architecture', ':google_mvp', ':database', ':notification', ':kotlin', ':customview', ':frameworkTest', ':processlife'
+include ':animator', ':layout', ':architecture', ':google_mvp', ':database', ':notification',
+    ':kotlin', ':customview', ':frameworkTest', ':processlife'

@@ -23,8 +23,9 @@ import org.greenrobot.eventbus.ThreadMode;
  * C is a Coder
  */
 
-public class NewsPresentImpl implements NewsPresent,
-    NewsInteraction.BaseListener<ArrayList<NewsStoriesData>>, ItemOnClickListener, NewsMQ {
+public class NewsPresentImpl
+    implements NewsPresent, NewsInteraction.BaseListener<ArrayList<NewsStoriesData>>,
+    ItemOnClickListener, NewsMQ {
 
   private NewsView mView;
   private NewsInteraction mInteraction;
@@ -44,26 +45,22 @@ public class NewsPresentImpl implements NewsPresent,
   public NewsPresentImpl() {
   }
 
-  @Override
-  public void onDestroy() {
+  @Override public void onDestroy() {
     mInteraction.cancel(NewsInteractionImpl.NEWS_LIST);
     mView = null;
     //EventBus.getDefault().unregister(this);
   }
 
-  @Override
-  public void onStart() {
+  @Override public void onStart() {
     mView.showProgressBar();
     mInteraction.getNewsList(this);
   }
 
-  @Override
-  public void attachRecyclerView(RecyclerView view) {
+  @Override public void attachRecyclerView(RecyclerView view) {
     view.setAdapter(mAdapter);
   }
 
-  @Override
-  public void success(ArrayList<NewsStoriesData> list) {
+  @Override public void success(ArrayList<NewsStoriesData> list) {
     mView.hideProgressBar();
     if (!mList.isEmpty()) {
       mList.clear();
@@ -75,8 +72,7 @@ public class NewsPresentImpl implements NewsPresent,
     //EventBus.getDefault().post(eventData);
   }
 
-  @Override
-  public void error(String error) {
+  @Override public void error(String error) {
     mView.hideProgressBar();
     mView.showMessage(error);
   }
@@ -89,13 +85,12 @@ public class NewsPresentImpl implements NewsPresent,
     }
   }
 
-  @Override
-  public void onClickItem(int position) {
+  @Override public void onClickItem(int position) {
     mView.gotoDetail(mList.get(position).id);
   }
+
   // 实现MQ接口
-  @Override
-  public String getTitle() {
+  @Override public String getTitle() {
     return mTitle;
   }
 }

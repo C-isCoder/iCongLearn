@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.view.View;
 
-
 import com.baichang.android.widget.magicIndicator.abs.IPagerNavigator;
 
 import com.baichang.android.widget.uiutils.UIUtil;
@@ -18,150 +17,141 @@ import java.util.List;
  */
 
 public class DummyCircleNavigator extends View implements IPagerNavigator {
-    private int mRadius;
-    private int mCircleColor;
-    private int mStrokeWidth;
-    private int mCircleSpacing;
-    private int mCircleCount;
+  private int mRadius;
+  private int mCircleColor;
+  private int mStrokeWidth;
+  private int mCircleSpacing;
+  private int mCircleCount;
 
-    private int mCurrentIndex;
-    private List<PointF> mCirclePoints = new ArrayList<PointF>();
-    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+  private int mCurrentIndex;
+  private List<PointF> mCirclePoints = new ArrayList<PointF>();
+  private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    public DummyCircleNavigator(Context context) {
-        super(context);
-        mRadius = UIUtil.dip2px(context, 3);
-        mCircleSpacing = UIUtil.dip2px(context, 8);
-        mStrokeWidth = UIUtil.dip2px(context, 1);
+  public DummyCircleNavigator(Context context) {
+    super(context);
+    mRadius = UIUtil.dip2px(context, 3);
+    mCircleSpacing = UIUtil.dip2px(context, 8);
+    mStrokeWidth = UIUtil.dip2px(context, 1);
+  }
+
+  @Override
+  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+  }
+
+  @Override public void onPageScrollStateChanged(int state) {
+  }
+
+  @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+    prepareCirclePoints();
+  }
+
+  private void prepareCirclePoints() {
+    mCirclePoints.clear();
+    if (mCircleCount > 0) {
+      int y = getHeight() / 2;
+      int measureWidth = mCircleCount * mRadius * 2 + (mCircleCount - 1) * mCircleSpacing;
+      int centerSpacing = mRadius * 2 + mCircleSpacing;
+      int startX = (getWidth() - measureWidth) / 2 + mRadius;
+      for (int i = 0; i < mCircleCount; i++) {
+        PointF pointF = new PointF(startX, y);
+        mCirclePoints.add(pointF);
+        startX += centerSpacing;
+      }
     }
+  }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-    }
+  @Override protected void onDraw(Canvas canvas) {
+    drawDeselectedCircles(canvas);
+    drawSelectedCircle(canvas);
+  }
 
-    @Override
-    public void onPageScrollStateChanged(int state) {
+  private void drawDeselectedCircles(Canvas canvas) {
+    mPaint.setStyle(Paint.Style.STROKE);
+    mPaint.setStrokeWidth(mStrokeWidth);
+    mPaint.setColor(mCircleColor);
+    for (int i = 0, j = mCirclePoints.size(); i < j; i++) {
+      PointF pointF = mCirclePoints.get(i);
+      canvas.drawCircle(pointF.x, pointF.y, mRadius, mPaint);
     }
+  }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        prepareCirclePoints();
+  private void drawSelectedCircle(Canvas canvas) {
+    mPaint.setStyle(Paint.Style.FILL);
+    if (mCirclePoints.size() > 0) {
+      float selectedCircleX = mCirclePoints.get(mCurrentIndex).x;
+      canvas.drawCircle(selectedCircleX, getHeight() / 2, mRadius, mPaint);
     }
+  }
 
-    private void prepareCirclePoints() {
-        mCirclePoints.clear();
-        if (mCircleCount > 0) {
-            int y = getHeight() / 2;
-            int measureWidth = mCircleCount * mRadius * 2 + (mCircleCount - 1) * mCircleSpacing;
-            int centerSpacing = mRadius * 2 + mCircleSpacing;
-            int startX = (getWidth() - measureWidth) / 2 + mRadius;
-            for (int i = 0; i < mCircleCount; i++) {
-                PointF pointF = new PointF(startX, y);
-                mCirclePoints.add(pointF);
-                startX += centerSpacing;
-            }
-        }
-    }
+  // 被添加到 magicindicator 时调用
+  @Override public void onAttachToMagicIndicator() {
+  }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        drawDeselectedCircles(canvas);
-        drawSelectedCircle(canvas);
-    }
+  // 从 magicindicator 上移除时调用
+  @Override public void onDetachFromMagicIndicator() {
+  }
 
-    private void drawDeselectedCircles(Canvas canvas) {
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(mStrokeWidth);
-        mPaint.setColor(mCircleColor);
-        for (int i = 0, j = mCirclePoints.size(); i < j; i++) {
-            PointF pointF = mCirclePoints.get(i);
-            canvas.drawCircle(pointF.x, pointF.y, mRadius, mPaint);
-        }
-    }
+  // 当指示数目改变时调用
+  @Override public void notifyDataSetChanged() {
+    prepareCirclePoints();
+    invalidate();
+  }
 
-    private void drawSelectedCircle(Canvas canvas) {
-        mPaint.setStyle(Paint.Style.FILL);
-        if (mCirclePoints.size() > 0) {
-            float selectedCircleX = mCirclePoints.get(mCurrentIndex).x;
-            canvas.drawCircle(selectedCircleX, getHeight() / 2, mRadius, mPaint);
-        }
-    }
+  @Override public void onPageSelected(int position) {
+    mCurrentIndex = position;
+    invalidate();
+  }
 
-    // 被添加到 magicindicator 时调用
-    @Override
-    public void onAttachToMagicIndicator() {
-    }
+  public int getCircleColor() {
+    return mCircleColor;
+  }
 
-    // 从 magicindicator 上移除时调用
-    @Override
-    public void onDetachFromMagicIndicator() {
-    }
+  public void setCircleColor(int circleColor) {
+    mCircleColor = circleColor;
+    invalidate();
+  }
 
-    // 当指示数目改变时调用
-    @Override
-    public void notifyDataSetChanged() {
-        prepareCirclePoints();
-        invalidate();
-    }
+  public int getStrokeWidth() {
+    return mStrokeWidth;
+  }
 
-    @Override
-    public void onPageSelected(int position) {
-        mCurrentIndex = position;
-        invalidate();
-    }
+  public void setStrokeWidth(int strokeWidth) {
+    mStrokeWidth = strokeWidth;
+    invalidate();
+  }
 
-    public int getCircleColor() {
-        return mCircleColor;
-    }
+  public int getRadius() {
+    return mRadius;
+  }
 
-    public void setCircleColor(int circleColor) {
-        mCircleColor = circleColor;
-        invalidate();
-    }
+  public void setRadius(int radius) {
+    mRadius = radius;
+    prepareCirclePoints();
+    invalidate();
+  }
 
-    public int getStrokeWidth() {
-        return mStrokeWidth;
-    }
+  public int getCircleSpacing() {
+    return mCircleSpacing;
+  }
 
-    public void setStrokeWidth(int strokeWidth) {
-        mStrokeWidth = strokeWidth;
-        invalidate();
-    }
+  public void setCircleSpacing(int circleSpacing) {
+    mCircleSpacing = circleSpacing;
+    prepareCirclePoints();
+    invalidate();
+  }
 
-    public int getRadius() {
-        return mRadius;
-    }
+  public int getCurrentIndex() {
+    return mCurrentIndex;
+  }
 
-    public void setRadius(int radius) {
-        mRadius = radius;
-        prepareCirclePoints();
-        invalidate();
-    }
+  public int getCircleCount() {
+    return mCircleCount;
+  }
 
-    public int getCircleSpacing() {
-        return mCircleSpacing;
-    }
-
-    public void setCircleSpacing(int circleSpacing) {
-        mCircleSpacing = circleSpacing;
-        prepareCirclePoints();
-        invalidate();
-    }
-
-    public int getCurrentIndex() {
-        return mCurrentIndex;
-    }
-
-    public int getCircleCount() {
-        return mCircleCount;
-    }
-
-    /**
-     * notifyDataSetChanged应该紧随其后调用
-     *
-     * @param circleCount
-     */
-    public void setCircleCount(int circleCount) {
-        mCircleCount = circleCount;
-    }
+  /**
+   * notifyDataSetChanged应该紧随其后调用
+   */
+  public void setCircleCount(int circleCount) {
+    mCircleCount = circleCount;
+  }
 }

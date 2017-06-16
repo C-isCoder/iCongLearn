@@ -29,15 +29,12 @@ public class UploadActivity extends CommonActivity {
 
   private static final String TAG = "CID";
 
-  @BindView(R.id.recycler_view)
-  RecyclerView rvList;
-  @BindView(R.id.image_view)
-  ImageView ivImage;
+  @BindView(R.id.recycler_view) RecyclerView rvList;
+  @BindView(R.id.image_view) ImageView ivImage;
 
   private RecyclerViewAdapter mAdapter;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_upload);
     ButterKnife.bind(this);
@@ -46,8 +43,7 @@ public class UploadActivity extends CommonActivity {
 
   private void initView() {
     mAdapter = new RecyclerViewAdapter<String>(this, R.layout.item_revcycle_view) {
-      @Override
-      protected void setItemData(ViewHolder viewHolder, String s, int i) {
+      @Override protected void setItemData(ViewHolder viewHolder, String s, int i) {
         viewHolder.setImageView(R.id.image_view, s);
       }
     }.setOnItemClickListener(position -> {
@@ -60,8 +56,7 @@ public class UploadActivity extends CommonActivity {
     rvList.setAdapter(mAdapter);
   }
 
-  @OnClick({R.id.button, R.id.button1})
-  void OnClick(View v) {
+  @OnClick({ R.id.button, R.id.button1 }) void OnClick(View v) {
     switch (v.getId()) {
       case R.id.button:
         upload();
@@ -77,15 +72,16 @@ public class UploadActivity extends CommonActivity {
    */
   private void upload() {
     String path = Environment.getExternalStorageDirectory().getAbsolutePath()
-        + File.separator + "佰倡测试下载" + "/test.png";
+        + File.separator
+        + "佰倡测试下载"
+        + "/test.png";
     Log.d(TAG, "测试图片路径：" + path);
     File file = new File(path);
     Log.d(TAG, "File：" + file.getAbsolutePath());
     api().upload(UploadUtils.getMultipartBody(file))
         .compose(HttpSubscriber.downSchedulers())
         .subscribe(new UploadSubscriber<List<String>>(this) {
-          @Override
-          public void onNext(List<String> list) {
+          @Override public void onNext(List<String> list) {
             Log.d(TAG, "ImagePath：" + list.get(0));
             showMessage("上传成功");
             rvList.setVisibility(View.GONE);
@@ -100,17 +96,29 @@ public class UploadActivity extends CommonActivity {
    */
   private void uploads() {
     String path = Environment.getExternalStorageDirectory().getAbsolutePath()
-        + File.separator + "佰倡测试下载" + "/test.png";
+        + File.separator
+        + "佰倡测试下载"
+        + "/test.png";
     String path1 = Environment.getExternalStorageDirectory().getAbsolutePath()
-        + File.separator + "佰倡测试下载" + "/test1.png";
+        + File.separator
+        + "佰倡测试下载"
+        + "/test1.png";
     String path2 = Environment.getExternalStorageDirectory().getAbsolutePath()
-        + File.separator + "佰倡测试下载" + "/test2.png";
+        + File.separator
+        + "佰倡测试下载"
+        + "/test2.png";
     String path3 = Environment.getExternalStorageDirectory().getAbsolutePath()
-        + File.separator + "佰倡测试下载" + "/test3.png";
+        + File.separator
+        + "佰倡测试下载"
+        + "/test3.png";
     String path4 = Environment.getExternalStorageDirectory().getAbsolutePath()
-        + File.separator + "佰倡测试下载" + "/test4.png";
+        + File.separator
+        + "佰倡测试下载"
+        + "/test4.png";
     String path5 = Environment.getExternalStorageDirectory().getAbsolutePath()
-        + File.separator + "佰倡测试下载" + "/test5.jpg";
+        + File.separator
+        + "佰倡测试下载"
+        + "/test5.jpg";
     Log.d(TAG, "测试图片路径：" + path);
     File file = new File(path);
     File file1 = new File(path1);
@@ -132,8 +140,7 @@ public class UploadActivity extends CommonActivity {
     api().uploads(UploadUtils.getMultipartBodysForFile(files))
         .compose(HttpSubscriber.downSchedulers())
         .subscribe(new UploadSubscriber<List<String>>(this) {
-          @Override
-          public void onNext(List<String> list) {
+          @Override public void onNext(List<String> list) {
             showMessage("上传成功");
             for (String s : list) {
               Log.d(TAG, "ImagePath：" + s);
@@ -153,8 +160,7 @@ public class UploadActivity extends CommonActivity {
     api().uploads(UploadUtils.getMultipartBodysForPath(paths))
         .compose(HttpSubscriber.downSchedulers())
         .subscribe(new UploadSubscriber<List<String>>(this) {
-          @Override
-          public void onNext(List<String> list) {
+          @Override public void onNext(List<String> list) {
             for (String s : list) {
               Log.d(TAG, "ImagePath：" + s);
             }

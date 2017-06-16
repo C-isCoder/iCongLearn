@@ -32,39 +32,39 @@ import java.util.List;
  */
 public interface TasksDataSource {
 
-    interface LoadTasksCallback {
+  interface LoadTasksCallback {
 
-        void onTasksLoaded(List<Task> tasks);
+    void onTasksLoaded(List<Task> tasks);
 
-        void onDataNotAvailable();
-    }
+    void onDataNotAvailable();
+  }
 
-    interface GetTaskCallback {
+  interface GetTaskCallback {
 
-        void onTaskLoaded(Task task);
+    void onTaskLoaded(Task task);
 
-        void onDataNotAvailable();
-    }
+    void onDataNotAvailable();
+  }
 
-    void getTasks(@NonNull LoadTasksCallback callback);
+  void getTasks(@NonNull LoadTasksCallback callback);
 
-    void getTask(@NonNull String taskId, @NonNull GetTaskCallback callback);
+  void getTask(@NonNull String taskId, @NonNull GetTaskCallback callback);
 
-    void saveTask(@NonNull Task task);
+  void saveTask(@NonNull Task task);
 
-    void completeTask(@NonNull Task task);
+  void completeTask(@NonNull Task task);
 
-    void completeTask(@NonNull String taskId);
+  void completeTask(@NonNull String taskId);
 
-    void activateTask(@NonNull Task task);
+  void activateTask(@NonNull Task task);
 
-    void activateTask(@NonNull String taskId);
+  void activateTask(@NonNull String taskId);
 
-    void clearCompletedTasks();
+  void clearCompletedTasks();
 
-    void refreshTasks();
+  void refreshTasks();
 
-    void deleteAllTasks();
+  void deleteAllTasks();
 
-    void deleteTask(@NonNull String taskId);
+  void deleteTask(@NonNull String taskId);
 }

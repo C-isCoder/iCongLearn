@@ -40,8 +40,7 @@ public class TasksActivity extends AppCompatActivity {
 
   private TasksPresenter mTasksPresenter;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.tasks_act);
 
@@ -65,8 +64,8 @@ public class TasksActivity extends AppCompatActivity {
     if (tasksFragment == null) {
       // Create the fragment
       tasksFragment = TasksFragment.newInstance();
-      ActivityUtils.addFragmentToActivity(
-          getSupportFragmentManager(), tasksFragment, R.id.contentFrame);
+      ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), tasksFragment,
+          R.id.contentFrame);
     }
 
     // Create the presenter
@@ -82,15 +81,13 @@ public class TasksActivity extends AppCompatActivity {
     }
   }
 
-  @Override
-  public void onSaveInstanceState(Bundle outState) {
+  @Override public void onSaveInstanceState(Bundle outState) {
     outState.putSerializable(CURRENT_FILTERING_KEY, mTasksPresenter.getFiltering());
 
     super.onSaveInstanceState(outState);
   }
 
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case android.R.id.home:
         // Open the navigation drawer when the home icon is selected from the toolbar.
@@ -103,8 +100,7 @@ public class TasksActivity extends AppCompatActivity {
   private void setupDrawerContent(NavigationView navigationView) {
     navigationView.setNavigationItemSelectedListener(
         new NavigationView.OnNavigationItemSelectedListener() {
-          @Override
-          public boolean onNavigationItemSelected(MenuItem menuItem) {
+          @Override public boolean onNavigationItemSelected(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
               case R.id.list_navigation_menu_item:
                 // Do nothing, we're already on that screen
@@ -124,5 +120,4 @@ public class TasksActivity extends AppCompatActivity {
           }
         });
   }
-
 }

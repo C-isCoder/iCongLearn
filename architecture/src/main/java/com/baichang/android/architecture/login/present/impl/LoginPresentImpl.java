@@ -1,6 +1,5 @@
 package com.baichang.android.architecture.login.present.impl;
 
-
 import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -35,28 +34,23 @@ public class LoginPresentImpl implements LoginPresent, LoginInteraction.BaseList
     loginView.setAvatar(drawable);
   }
 
-  @Override
-  public void login(String username, String password) {
+  @Override public void login(String username, String password) {
     loginView.showProgressBar();
     loginInteraction.Login(username, password, this);
   }
 
-  @Override
-  public void onDestroy() {
+  @Override public void onDestroy() {
     loginView = null;
     activity = null;
   }
 
-  @Override
-  public void onStart() {
+  @Override public void onStart() {
 
   }
 
-  @Override
-  public void success(Object o) {
+  @Override public void success(Object o) {
     activity.runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         loginView.showMessage("登陆成功");
         loginView.hideProgressBar();
         loginView.gotoHome();
@@ -64,11 +58,9 @@ public class LoginPresentImpl implements LoginPresent, LoginInteraction.BaseList
     });
   }
 
-  @Override
-  public void error(String error) {
+  @Override public void error(String error) {
     activity.runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         loginView.hideProgressBar();
         loginView.clean();
         loginView.showMessage("登陆失败，用户名或密码错误");

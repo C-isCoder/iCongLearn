@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
-
 import com.baichang.android.widget.magicIndicator.FragmentContainerHelper;
 import com.baichang.android.widget.magicIndicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.baichang.android.widget.magicIndicator.buildins.commonnavigator.model.PositionData;
@@ -21,162 +20,162 @@ import java.util.List;
  */
 
 public class CommonPagerIndicator extends View implements IPagerIndicator {
-    public static final int MODE_MATCH_EDGE = 0;   // drawable宽度 == title宽度 - 2 * mXOffset
-    public static final int MODE_WRAP_CONTENT = 1;    // drawable宽度 == title内容宽度 - 2 * mXOffset
-    public static final int MODE_EXACTLY = 2;
+  public static final int MODE_MATCH_EDGE = 0;   // drawable宽度 == title宽度 - 2 * mXOffset
+  public static final int MODE_WRAP_CONTENT = 1;    // drawable宽度 == title内容宽度 - 2 * mXOffset
+  public static final int MODE_EXACTLY = 2;
 
-    private int mMode;  // 默认为MODE_MATCH_EDGE模式
-    private Drawable mIndicatorDrawable;
+  private int mMode;  // 默认为MODE_MATCH_EDGE模式
+  private Drawable mIndicatorDrawable;
 
-    // 控制动画
-    private Interpolator mStartInterpolator = new LinearInterpolator();
-    private Interpolator mEndInterpolator = new LinearInterpolator();
+  // 控制动画
+  private Interpolator mStartInterpolator = new LinearInterpolator();
+  private Interpolator mEndInterpolator = new LinearInterpolator();
 
-    private float mDrawableHeight;
-    private float mDrawableWidth;
-    private float mYOffset;
-    private float mXOffset;
+  private float mDrawableHeight;
+  private float mDrawableWidth;
+  private float mYOffset;
+  private float mXOffset;
 
-    private List<PositionData> mPositionDataList;
-    private Rect mDrawableRect = new Rect();
+  private List<PositionData> mPositionDataList;
+  private Rect mDrawableRect = new Rect();
 
-    public CommonPagerIndicator(Context context) {
-        super(context);
+  public CommonPagerIndicator(Context context) {
+    super(context);
+  }
+
+  @Override
+  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    if (mIndicatorDrawable == null) {
+      return;
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (mIndicatorDrawable == null) {
-            return;
-        }
-
-        if (mPositionDataList == null || mPositionDataList.isEmpty()) {
-            return;
-        }
-
-        // 计算锚点位置
-        PositionData current = FragmentContainerHelper.getImitativePositionData(mPositionDataList, position);
-        PositionData next = FragmentContainerHelper.getImitativePositionData(mPositionDataList, position + 1);
-
-        float leftX;
-        float nextLeftX;
-        float rightX;
-        float nextRightX;
-        if (mMode == MODE_MATCH_EDGE) {
-            leftX = current.mLeft + mXOffset;
-            nextLeftX = next.mLeft + mXOffset;
-            rightX = current.mRight - mXOffset;
-            nextRightX = next.mRight - mXOffset;
-            mDrawableRect.top = (int) mYOffset;
-            mDrawableRect.bottom = (int) (getHeight() - mYOffset);
-        } else if (mMode == MODE_WRAP_CONTENT) {
-            leftX = current.mContentLeft + mXOffset;
-            nextLeftX = next.mContentLeft + mXOffset;
-            rightX = current.mContentRight - mXOffset;
-            nextRightX = next.mContentRight - mXOffset;
-            mDrawableRect.top = (int) (current.mContentTop - mYOffset);
-            mDrawableRect.bottom = (int) (current.mContentBottom + mYOffset);
-        } else {    // MODE_EXACTLY
-            leftX = current.mLeft + (current.width() - mDrawableWidth) / 2;
-            nextLeftX = next.mLeft + (next.width() - mDrawableWidth) / 2;
-            rightX = current.mLeft + (current.width() + mDrawableWidth) / 2;
-            nextRightX = next.mLeft + (next.width() + mDrawableWidth) / 2;
-            mDrawableRect.top = (int) (getHeight() - mDrawableHeight - mYOffset);
-            mDrawableRect.bottom = (int) (getHeight() - mYOffset);
-        }
-
-        mDrawableRect.left = (int) (leftX + (nextLeftX - leftX) * mStartInterpolator.getInterpolation(positionOffset));
-        mDrawableRect.right = (int) (rightX + (nextRightX - rightX) * mEndInterpolator.getInterpolation(positionOffset));
-        mIndicatorDrawable.setBounds(mDrawableRect);
-
-        invalidate();
+    if (mPositionDataList == null || mPositionDataList.isEmpty()) {
+      return;
     }
 
-    @Override
-    public void onPageSelected(int position) {
+    // 计算锚点位置
+    PositionData current =
+        FragmentContainerHelper.getImitativePositionData(mPositionDataList, position);
+    PositionData next =
+        FragmentContainerHelper.getImitativePositionData(mPositionDataList, position + 1);
+
+    float leftX;
+    float nextLeftX;
+    float rightX;
+    float nextRightX;
+    if (mMode == MODE_MATCH_EDGE) {
+      leftX = current.mLeft + mXOffset;
+      nextLeftX = next.mLeft + mXOffset;
+      rightX = current.mRight - mXOffset;
+      nextRightX = next.mRight - mXOffset;
+      mDrawableRect.top = (int) mYOffset;
+      mDrawableRect.bottom = (int) (getHeight() - mYOffset);
+    } else if (mMode == MODE_WRAP_CONTENT) {
+      leftX = current.mContentLeft + mXOffset;
+      nextLeftX = next.mContentLeft + mXOffset;
+      rightX = current.mContentRight - mXOffset;
+      nextRightX = next.mContentRight - mXOffset;
+      mDrawableRect.top = (int) (current.mContentTop - mYOffset);
+      mDrawableRect.bottom = (int) (current.mContentBottom + mYOffset);
+    } else {    // MODE_EXACTLY
+      leftX = current.mLeft + (current.width() - mDrawableWidth) / 2;
+      nextLeftX = next.mLeft + (next.width() - mDrawableWidth) / 2;
+      rightX = current.mLeft + (current.width() + mDrawableWidth) / 2;
+      nextRightX = next.mLeft + (next.width() + mDrawableWidth) / 2;
+      mDrawableRect.top = (int) (getHeight() - mDrawableHeight - mYOffset);
+      mDrawableRect.bottom = (int) (getHeight() - mYOffset);
     }
 
-    @Override
-    public void onPageScrollStateChanged(int state) {
-    }
+    mDrawableRect.left =
+        (int) (leftX + (nextLeftX - leftX) * mStartInterpolator.getInterpolation(positionOffset));
+    mDrawableRect.right =
+        (int) (rightX + (nextRightX - rightX) * mEndInterpolator.getInterpolation(positionOffset));
+    mIndicatorDrawable.setBounds(mDrawableRect);
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        if (mIndicatorDrawable != null) {
-            mIndicatorDrawable.draw(canvas);
-        }
-    }
+    invalidate();
+  }
 
-    @Override
-    public void onPositionDataProvide(List<PositionData> dataList) {
-        mPositionDataList = dataList;
-    }
+  @Override public void onPageSelected(int position) {
+  }
 
-    public Drawable getIndicatorDrawable() {
-        return mIndicatorDrawable;
-    }
+  @Override public void onPageScrollStateChanged(int state) {
+  }
 
-    public void setIndicatorDrawable(Drawable indicatorDrawable) {
-        mIndicatorDrawable = indicatorDrawable;
+  @Override protected void onDraw(Canvas canvas) {
+    if (mIndicatorDrawable != null) {
+      mIndicatorDrawable.draw(canvas);
     }
+  }
 
-    public Interpolator getStartInterpolator() {
-        return mStartInterpolator;
-    }
+  @Override public void onPositionDataProvide(List<PositionData> dataList) {
+    mPositionDataList = dataList;
+  }
 
-    public void setStartInterpolator(Interpolator startInterpolator) {
-        mStartInterpolator = startInterpolator;
-    }
+  public Drawable getIndicatorDrawable() {
+    return mIndicatorDrawable;
+  }
 
-    public Interpolator getEndInterpolator() {
-        return mEndInterpolator;
-    }
+  public void setIndicatorDrawable(Drawable indicatorDrawable) {
+    mIndicatorDrawable = indicatorDrawable;
+  }
 
-    public void setEndInterpolator(Interpolator endInterpolator) {
-        mEndInterpolator = endInterpolator;
-    }
+  public Interpolator getStartInterpolator() {
+    return mStartInterpolator;
+  }
 
-    public int getMode() {
-        return mMode;
-    }
+  public void setStartInterpolator(Interpolator startInterpolator) {
+    mStartInterpolator = startInterpolator;
+  }
 
-    public void setMode(int mode) {
-        if (mode == MODE_EXACTLY || mode == MODE_MATCH_EDGE || mode == MODE_WRAP_CONTENT) {
-            mMode = mode;
-        } else {
-            throw new IllegalArgumentException("mode " + mode + " not supported.");
-        }
-    }
+  public Interpolator getEndInterpolator() {
+    return mEndInterpolator;
+  }
 
-    public float getDrawableHeight() {
-        return mDrawableHeight;
-    }
+  public void setEndInterpolator(Interpolator endInterpolator) {
+    mEndInterpolator = endInterpolator;
+  }
 
-    public void setDrawableHeight(float drawableHeight) {
-        mDrawableHeight = drawableHeight;
-    }
+  public int getMode() {
+    return mMode;
+  }
 
-    public float getDrawableWidth() {
-        return mDrawableWidth;
+  public void setMode(int mode) {
+    if (mode == MODE_EXACTLY || mode == MODE_MATCH_EDGE || mode == MODE_WRAP_CONTENT) {
+      mMode = mode;
+    } else {
+      throw new IllegalArgumentException("mode " + mode + " not supported.");
     }
+  }
 
-    public void setDrawableWidth(float drawableWidth) {
-        mDrawableWidth = drawableWidth;
-    }
+  public float getDrawableHeight() {
+    return mDrawableHeight;
+  }
 
-    public float getYOffset() {
-        return mYOffset;
-    }
+  public void setDrawableHeight(float drawableHeight) {
+    mDrawableHeight = drawableHeight;
+  }
 
-    public void setYOffset(float yOffset) {
-        mYOffset = yOffset;
-    }
+  public float getDrawableWidth() {
+    return mDrawableWidth;
+  }
 
-    public float getXOffset() {
-        return mXOffset;
-    }
+  public void setDrawableWidth(float drawableWidth) {
+    mDrawableWidth = drawableWidth;
+  }
 
-    public void setXOffset(float xOffset) {
-        mXOffset = xOffset;
-    }
+  public float getYOffset() {
+    return mYOffset;
+  }
+
+  public void setYOffset(float yOffset) {
+    mYOffset = yOffset;
+  }
+
+  public float getXOffset() {
+    return mXOffset;
+  }
+
+  public void setXOffset(float xOffset) {
+    mXOffset = xOffset;
+  }
 }

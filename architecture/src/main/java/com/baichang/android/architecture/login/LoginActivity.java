@@ -18,19 +18,14 @@ import com.baichang.android.architecture.news.NewsActivity;
 
 public class LoginActivity extends BaseActivity implements LoginView {
 
-  @BindView(R.id.et_name)
-  EditText etName;
-  @BindView(R.id.et_pw)
-  EditText etPw;
-  @BindView(R.id.pb_bar)
-  ProgressBar pbBar;
-  @BindView(R.id.iv_avatar)
-  ImageView ivAvatar;
+  @BindView(R.id.et_name) EditText etName;
+  @BindView(R.id.et_pw) EditText etPw;
+  @BindView(R.id.pb_bar) ProgressBar pbBar;
+  @BindView(R.id.iv_avatar) ImageView ivAvatar;
 
   private LoginPresent loginPresent;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
     ButterKnife.bind(this);
@@ -44,44 +39,36 @@ public class LoginActivity extends BaseActivity implements LoginView {
     loginPresent = new LoginPresentImpl(this, this);
   }
 
-  @Override
-  public void showProgressBar() {
+  @Override public void showProgressBar() {
     pbBar.setVisibility(View.VISIBLE);
   }
 
-  @Override
-  public void hideProgressBar() {
+  @Override public void hideProgressBar() {
     pbBar.setVisibility(View.GONE);
   }
 
-  @Override
-  public void gotoHome() {
+  @Override public void gotoHome() {
     startActivity(new Intent(this, NewsActivity.class));
   }
 
-  @Override
-  public void clean() {
+  @Override public void clean() {
     etName.setText("");
     etPw.setText("");
   }
 
-  @Override
-  public void setAvatar(Drawable drawable) {
+  @Override public void setAvatar(Drawable drawable) {
     ivAvatar.setImageDrawable(drawable);
   }
 
-  @Override
-  public void showMessage(String msg) {
+  @Override public void showMessage(String msg) {
     showToast(msg);
   }
-
 
   public void login(View view) {
     loginPresent.login(etName.getText().toString(), etPw.getText().toString());
   }
 
-  @Override
-  protected void onDestroy() {
+  @Override protected void onDestroy() {
     loginPresent.onDestroy();
     super.onDestroy();
   }

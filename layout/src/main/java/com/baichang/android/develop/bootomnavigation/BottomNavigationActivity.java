@@ -12,32 +12,29 @@ public class BottomNavigationActivity extends AppCompatActivity {
 
   private TextView mTextMessage;
 
-  private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-      = new BottomNavigationView.OnNavigationItemSelectedListener() {
+  private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
+      new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-      switch (item.getItemId()) {
-        case R.id.navigation_home:
-          mTextMessage.setText(R.string.title_home);
-          return true;
-        case R.id.navigation_store:
-          mTextMessage.setText(R.string.title_store);
-          return true;
-        case R.id.navigation_interaction:
-          mTextMessage.setText(R.string.title_interaction);
-          return true;
-        case R.id.navigation_me:
-          mTextMessage.setText(R.string.title_me);
-          return true;
-      }
-      return false;
-    }
+        @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+          switch (item.getItemId()) {
+            case R.id.navigation_home:
+              mTextMessage.setText(R.string.title_home);
+              return true;
+            case R.id.navigation_store:
+              mTextMessage.setText(R.string.title_store);
+              return true;
+            case R.id.navigation_interaction:
+              mTextMessage.setText(R.string.title_interaction);
+              return true;
+            case R.id.navigation_me:
+              mTextMessage.setText(R.string.title_me);
+              return true;
+          }
+          return false;
+        }
+      };
 
-  };
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_bottom_navigation);
 
@@ -45,5 +42,4 @@ public class BottomNavigationActivity extends AppCompatActivity {
     BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
   }
-
 }

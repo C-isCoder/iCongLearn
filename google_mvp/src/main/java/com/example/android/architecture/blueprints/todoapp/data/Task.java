@@ -32,14 +32,11 @@ import java.util.UUID;
  */
 public final class Task {
 
-  @NonNull
-  private final String mId;
+  @NonNull private final String mId;
 
-  @Nullable
-  private final String mTitle;
+  @Nullable private final String mTitle;
 
-  @Nullable
-  private final String mDescription;
+  @Nullable private final String mDescription;
 
   private final boolean mCompleted;
 
@@ -85,26 +82,23 @@ public final class Task {
    * @param id id of the task
    * @param completed true if the task is completed, false if it's active
    */
-  public Task(@Nullable String title, @Nullable String description,
-      @NonNull String id, boolean completed) {
+  public Task(@Nullable String title, @Nullable String description, @NonNull String id,
+      boolean completed) {
     mId = id;
     mTitle = title;
     mDescription = description;
     mCompleted = completed;
   }
 
-  @NonNull
-  public String getId() {
+  @NonNull public String getId() {
     return mId;
   }
 
-  @Nullable
-  public String getTitle() {
+  @Nullable public String getTitle() {
     return mTitle;
   }
 
-  @Nullable
-  public String getTitleForList() {
+  @Nullable public String getTitleForList() {
     if (!TextUtils.isEmpty(mTitle)) {
       return mTitle;
     } else {
@@ -112,8 +106,7 @@ public final class Task {
     }
   }
 
-  @Nullable
-  public String getDescription() {
+  @Nullable public String getDescription() {
     return mDescription;
   }
 
@@ -126,12 +119,10 @@ public final class Task {
   }
 
   public boolean isEmpty() {
-    return TextUtils.isEmpty(mTitle) &&
-        TextUtils.isEmpty(mDescription);
+    return TextUtils.isEmpty(mTitle) && TextUtils.isEmpty(mDescription);
   }
 
-  @Override
-  public boolean equals(Object o) {
+  @Override public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -139,14 +130,12 @@ public final class Task {
       return false;
     }
     Task task = (Task) o;
-    return TextUtils.equals(mId, task.mId) &&
-        TextUtils.equals(mTitle, task.mTitle) &&
-        TextUtils.equals(mDescription, task.mDescription);
+    return TextUtils.equals(mId, task.mId)
+        && TextUtils.equals(mTitle, task.mTitle)
+        && TextUtils.equals(mDescription, task.mDescription);
   }
 
-  @TargetApi(VERSION_CODES.KITKAT)
-  @Override
-  public int hashCode() {
+  @TargetApi(VERSION_CODES.KITKAT) @Override public int hashCode() {
     List<String> list = new ArrayList<>();
     list.add(mId);
     list.add(mDescription);
@@ -154,8 +143,7 @@ public final class Task {
     return Objects.hashCode(list);
   }
 
-  @Override
-  public String toString() {
+  @Override public String toString() {
     return "Task with title " + mTitle;
   }
 }

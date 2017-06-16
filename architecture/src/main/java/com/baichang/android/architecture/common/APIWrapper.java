@@ -22,24 +22,24 @@ public class APIWrapper implements API {
 
   public APIWrapper() {
     if (RETROFIT == null) {
-      RETROFIT = new Retrofit.Builder()
-          .baseUrl(APIConstants.API_DEFAULT_HOST)
+      RETROFIT = new Retrofit.Builder().baseUrl(APIConstants.API_DEFAULT_HOST)
           .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
           .addConverterFactory(GsonConverterFactory.create())
           .build();
     }
   }
 
-  @Override
-  public Observable<BaseData<NewsStoriesData>> getList() {
-    return RETROFIT.create(API.class).getList().subscribeOn(Schedulers.io())
+  @Override public Observable<BaseData<NewsStoriesData>> getList() {
+    return RETROFIT.create(API.class)
+        .getList()
+        .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  @Override
-  public Observable<NewsDetailData> getDetail(@Path("id") int id) {
-    return RETROFIT.create(API.class).getDetail(id).subscribeOn(Schedulers.io())
+  @Override public Observable<NewsDetailData> getDetail(@Path("id") int id) {
+    return RETROFIT.create(API.class)
+        .getDetail(id)
+        .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
-
 }

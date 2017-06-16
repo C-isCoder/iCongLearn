@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.baichang.android.develop.recycleritemdecoration.RecyclerItemDecorationActivity">
+    tools:context="com.baichang.android.develop.recycleritemdecoration.RecyclerItemDecorationActivity"
+    >
 
-   <android.support.v7.widget.RecyclerView
-       android:id="@+id/recycler_view"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:background="@android:color/darker_gray"
-       app:layoutManager="LinearLayoutManager" />
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/darker_gray"
+      app:layoutManager="LinearLayoutManager"
+      />
 </FrameLayout>

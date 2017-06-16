@@ -28,197 +28,183 @@ import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingRe
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Listens to user actions from the UI ({@link TasksFragment}), retrieves the data and updates the
  * UI as required.
  */
 class TasksPresenter implements TasksContract.Presenter {
 
-    private final TasksRepository mTasksRepository;
+  private final TasksRepository mTasksRepository;
 
-    private final TasksContract.View mTasksView;
+  private final TasksContract.View mTasksView;
 
-    private TasksFilterType mCurrentFiltering = TasksFilterType.ALL_TASKS;
+  private TasksFilterType mCurrentFiltering = TasksFilterType.ALL_TASKS;
 
-    private boolean mFirstLoad = true;
+  private boolean mFirstLoad = true;
 
-    TasksPresenter(@NonNull TasksRepository tasksRepository, @NonNull TasksContract.View tasksView) {
-        mTasksRepository =tasksRepository;
-        mTasksView = tasksView;
-        mTasksView.setPresenter(this);
+  TasksPresenter(@NonNull TasksRepository tasksRepository, @NonNull TasksContract.View tasksView) {
+    mTasksRepository = tasksRepository;
+    mTasksView = tasksView;
+    mTasksView.setPresenter(this);
+  }
+
+  @Override public void start() {
+    loadTasks(false);
+  }
+
+  @Override public void result(int requestCode, int resultCode) {
+    // If a task was successfully added, show snackbar
+    if (AddEditTaskActivity.REQUEST_ADD_TASK == requestCode && Activity.RESULT_OK == resultCode) {
+      mTasksView.showSuccessfullySavedMessage();
+    }
+  }
+
+  @Override public void loadTasks(boolean forceUpdate) {
+    // Simplification for sample: a network reload will be forced on first load.
+    loadTasks(forceUpdate || mFirstLoad, true);
+    mFirstLoad = false;
+  }
+
+  /**
+   * @param forceUpdate Pass in true to refresh the data in the {@link TasksDataSource}
+   * @param showLoadingUI Pass in true to display a loading icon in the UI
+   */
+  private void loadTasks(boolean forceUpdate, final boolean showLoadingUI) {
+    if (showLoadingUI) {
+      mTasksView.setLoadingIndicator(true);
+    }
+    if (forceUpdate) {
+      mTasksRepository.refreshTasks();
     }
 
-    @Override
-    public void start() {
-        loadTasks(false);
-    }
+    // The network request might be handled in a different thread so make sure Espresso knows
+    // that the app is busy until the response is handled.
+    EspressoIdlingResource.increment(); // App is busy until further notice
 
-    @Override
-    public void result(int requestCode, int resultCode) {
-        // If a task was successfully added, show snackbar
-        if (AddEditTaskActivity.REQUEST_ADD_TASK == requestCode && Activity.RESULT_OK == resultCode) {
-            mTasksView.showSuccessfullySavedMessage();
+    mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
+      @Override public void onTasksLoaded(List<Task> tasks) {
+        List<Task> tasksToShow = new ArrayList<Task>();
+
+        // We filter the tasks based on the requestType
+        for (Task task : tasks) {
+          switch (mCurrentFiltering) {
+            case ALL_TASKS:
+              tasksToShow.add(task);
+              break;
+            case ACTIVE_TASKS:
+              if (task.isActive()) {
+                tasksToShow.add(task);
+              }
+              break;
+            case COMPLETED_TASKS:
+              if (task.isCompleted()) {
+                tasksToShow.add(task);
+              }
+              break;
+            default:
+              tasksToShow.add(task);
+              break;
+          }
         }
-    }
-
-    @Override
-    public void loadTasks(boolean forceUpdate) {
-        // Simplification for sample: a network reload will be forced on first load.
-        loadTasks(forceUpdate || mFirstLoad, true);
-        mFirstLoad = false;
-    }
-
-    /**
-     * @param forceUpdate   Pass in true to refresh the data in the {@link TasksDataSource}
-     * @param showLoadingUI Pass in true to display a loading icon in the UI
-     */
-    private void loadTasks(boolean forceUpdate, final boolean showLoadingUI) {
+        // The view may not be able to handle UI updates anymore
+        if (!mTasksView.isActive()) {
+          return;
+        }
         if (showLoadingUI) {
-            mTasksView.setLoadingIndicator(true);
-        }
-        if (forceUpdate) {
-            mTasksRepository.refreshTasks();
+          mTasksView.setLoadingIndicator(false);
         }
 
-        // The network request might be handled in a different thread so make sure Espresso knows
-        // that the app is busy until the response is handled.
-        EspressoIdlingResource.increment(); // App is busy until further notice
+        processTasks(tasksToShow);
+      }
 
-        mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
-            @Override
-            public void onTasksLoaded(List<Task> tasks) {
-                List<Task> tasksToShow = new ArrayList<Task>();
-
-                // We filter the tasks based on the requestType
-                for (Task task : tasks) {
-                    switch (mCurrentFiltering) {
-                        case ALL_TASKS:
-                            tasksToShow.add(task);
-                            break;
-                        case ACTIVE_TASKS:
-                            if (task.isActive()) {
-                                tasksToShow.add(task);
-                            }
-                            break;
-                        case COMPLETED_TASKS:
-                            if (task.isCompleted()) {
-                                tasksToShow.add(task);
-                            }
-                            break;
-                        default:
-                            tasksToShow.add(task);
-                            break;
-                    }
-                }
-                // The view may not be able to handle UI updates anymore
-                if (!mTasksView.isActive()) {
-                    return;
-                }
-                if (showLoadingUI) {
-                    mTasksView.setLoadingIndicator(false);
-                }
-
-                processTasks(tasksToShow);
-            }
-
-            @Override
-            public void onDataNotAvailable() {
-                // The view may not be able to handle UI updates anymore
-                if (!mTasksView.isActive()) {
-                    return;
-                }
-                mTasksView.showLoadingTasksError();
-            }
-        });
-    }
-
-    private void processTasks(List<Task> tasks) {
-        if (tasks.isEmpty()) {
-            // Show a message indicating there are no tasks for that filter type.
-            processEmptyTasks();
-        } else {
-            // Show the list of tasks
-            mTasksView.showTasks(tasks);
-            // Set the filter label's text.
-            showFilterLabel();
+      @Override public void onDataNotAvailable() {
+        // The view may not be able to handle UI updates anymore
+        if (!mTasksView.isActive()) {
+          return;
         }
-    }
+        mTasksView.showLoadingTasksError();
+      }
+    });
+  }
 
-    private void showFilterLabel() {
-        switch (mCurrentFiltering) {
-            case ACTIVE_TASKS:
-                mTasksView.showActiveFilterLabel();
-                break;
-            case COMPLETED_TASKS:
-                mTasksView.showCompletedFilterLabel();
-                break;
-            default:
-                mTasksView.showAllFilterLabel();
-                break;
-        }
+  private void processTasks(List<Task> tasks) {
+    if (tasks.isEmpty()) {
+      // Show a message indicating there are no tasks for that filter type.
+      processEmptyTasks();
+    } else {
+      // Show the list of tasks
+      mTasksView.showTasks(tasks);
+      // Set the filter label's text.
+      showFilterLabel();
     }
+  }
 
-    private void processEmptyTasks() {
-        switch (mCurrentFiltering) {
-            case ACTIVE_TASKS:
-                mTasksView.showNoActiveTasks();
-                break;
-            case COMPLETED_TASKS:
-                mTasksView.showNoCompletedTasks();
-                break;
-            default:
-                mTasksView.showNoTasks();
-                break;
-        }
+  private void showFilterLabel() {
+    switch (mCurrentFiltering) {
+      case ACTIVE_TASKS:
+        mTasksView.showActiveFilterLabel();
+        break;
+      case COMPLETED_TASKS:
+        mTasksView.showCompletedFilterLabel();
+        break;
+      default:
+        mTasksView.showAllFilterLabel();
+        break;
     }
+  }
 
-    @Override
-    public void addNewTask() {
-        mTasksView.showAddTask();
+  private void processEmptyTasks() {
+    switch (mCurrentFiltering) {
+      case ACTIVE_TASKS:
+        mTasksView.showNoActiveTasks();
+        break;
+      case COMPLETED_TASKS:
+        mTasksView.showNoCompletedTasks();
+        break;
+      default:
+        mTasksView.showNoTasks();
+        break;
     }
+  }
 
-    @Override
-    public void openTaskDetails(@NonNull Task requestedTask) {
-        mTasksView.showTaskDetailsUi(requestedTask.getId());
-    }
+  @Override public void addNewTask() {
+    mTasksView.showAddTask();
+  }
 
-    @Override
-    public void completeTask(@NonNull Task completedTask) {
-        mTasksRepository.completeTask(completedTask);
-        mTasksView.showTaskMarkedComplete();
-        loadTasks(false, false);
-    }
+  @Override public void openTaskDetails(@NonNull Task requestedTask) {
+    mTasksView.showTaskDetailsUi(requestedTask.getId());
+  }
 
-    @Override
-    public void activateTask(@NonNull Task activeTask) {
-        mTasksRepository.activateTask(activeTask);
-        mTasksView.showTaskMarkedActive();
-        loadTasks(false, false);
-    }
+  @Override public void completeTask(@NonNull Task completedTask) {
+    mTasksRepository.completeTask(completedTask);
+    mTasksView.showTaskMarkedComplete();
+    loadTasks(false, false);
+  }
 
-    @Override
-    public void clearCompletedTasks() {
-        mTasksRepository.clearCompletedTasks();
-        mTasksView.showCompletedTasksCleared();
-        loadTasks(false, false);
-    }
+  @Override public void activateTask(@NonNull Task activeTask) {
+    mTasksRepository.activateTask(activeTask);
+    mTasksView.showTaskMarkedActive();
+    loadTasks(false, false);
+  }
 
-    /**
-     * Sets the current task filtering type.
-     *
-     * @param requestType Can be {@link TasksFilterType#ALL_TASKS},
-     *                    {@link TasksFilterType#COMPLETED_TASKS}, or
-     *                    {@link TasksFilterType#ACTIVE_TASKS}
-     */
-    @Override
-    public void setFiltering(TasksFilterType requestType) {
-        mCurrentFiltering = requestType;
-    }
+  @Override public void clearCompletedTasks() {
+    mTasksRepository.clearCompletedTasks();
+    mTasksView.showCompletedTasksCleared();
+    loadTasks(false, false);
+  }
 
-    @Override
-    public TasksFilterType getFiltering() {
-        return mCurrentFiltering;
-    }
+  /**
+   * Sets the current task filtering type.
+   *
+   * @param requestType Can be {@link TasksFilterType#ALL_TASKS},
+   * {@link TasksFilterType#COMPLETED_TASKS}, or
+   * {@link TasksFilterType#ACTIVE_TASKS}
+   */
+  @Override public void setFiltering(TasksFilterType requestType) {
+    mCurrentFiltering = requestType;
+  }
 
+  @Override public TasksFilterType getFiltering() {
+    return mCurrentFiltering;
+  }
 }

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:tools="http://schemas.android.com/tools"
-   android:id="@+id/activity_news_detail"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   tools:context="com.baichang.android.architecture.news.NewsDetailActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_news_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.baichang.android.architecture.news.NewsDetailActivity"
+    >
 
-   <ProgressBar
+  <ProgressBar
       android:id="@+id/news_detail_bar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
-      android:visibility="gone" />
+      android:visibility="gone"
+      />
 
-   <WebView
+  <WebView
       android:id="@+id/news_detail_web"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:scrollbarSize="5dp" />
+      android:scrollbarSize="5dp"
+      />
 </RelativeLayout>

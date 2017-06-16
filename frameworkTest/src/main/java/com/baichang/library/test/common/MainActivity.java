@@ -20,21 +20,21 @@ import com.baichang.library.test.common.qrcode.QrCodeActivity;
 import com.umeng.share.BCUmUtil;
 import rx.Observable;
 
-
 public class MainActivity extends CommonActivity {
 
-  private static final String DOWNLOAD_TEST = "https://sm.wdjcdn.com/release/files/jupiter/5.24.1.12069/wandoujia-web_seo_baidu_homepage.apk";
+  private static final String DOWNLOAD_TEST =
+      "https://sm.wdjcdn.com/release/files/jupiter/5.24.1.12069/wandoujia-web_seo_baidu_homepage.apk";
   private static final String SHARE_URL_TEST = "http://www.baidu.com";
-  private static final String[] IMAGES = new String[]{
+  private static final String[] IMAGES = new String[] {
       "group1/M00/00/8A/cxydmlhSINOAdClaAAIOEBpej0w098.png",
       "group1/M00/00/8A/cxydmlhSINOAP-a2AAGcq0WFRI4721.png",
       "group1/M00/00/8A/cxydmlhSINOATJP7AAp3kep8MyQ367.png",
       "group1/M00/00/8A/cxydmlhSINOAUlMiAAk0bpeRed4096.png",
       "group1/M00/00/8A/cxydmlhSINSAXuN3AAGHObcCVh0892.png",
-      "group1/M00/00/8A/cxydmlhSINSAMBeCAABqTWWG-yY171.jpg"};
+      "group1/M00/00/8A/cxydmlhSINSAMBeCAABqTWWG-yY171.jpg"
+  };
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     requestWindowFeature(Window.FEATURE_ACTION_BAR);
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -48,10 +48,11 @@ public class MainActivity extends CommonActivity {
     showMessage(AppDiskCache.getToken());
   }
 
-  @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6,
+  @OnClick({
+      R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6,
       R.id.button7, R.id.button8, R.id.button9, R.id.button0, R.id.button11, R.id.button12,
-      R.id.button13, R.id.button14, R.id.button15, R.id.button16, R.id.button17})
-  void onClick(View v) {
+      R.id.button13, R.id.button14, R.id.button15, R.id.button16, R.id.button17
+  }) void onClick(View v) {
     switch (v.getId()) {
       case R.id.button1:
         startAct(getAty(), RequestActivity.class);
@@ -94,13 +95,13 @@ public class MainActivity extends CommonActivity {
         startAct(getAty(), HttpsWebViewActivity.class);
         break;
       case R.id.button14:
-//                BCCitySelectPop.Builder builder = new BCCitySelectPop.Builder();
-//                builder.setLineColor(R.color.cm_btn_orange_f)
-//                        .setListener(this::showMessage)
-//                        .setTextSize(16)
-//                        .setTitleText("选择地址")
-//                        .create(getAty())
-//                        .show(getWindow().getDecorView());
+        //                BCCitySelectPop.Builder builder = new BCCitySelectPop.Builder();
+        //                builder.setLineColor(R.color.cm_btn_orange_f)
+        //                        .setListener(this::showMessage)
+        //                        .setTextSize(16)
+        //                        .setTitleText("选择地址")
+        //                        .create(getAty())
+        //                        .show(getWindow().getDecorView());
         BCCitySelectPop pop = new BCCitySelectPop(getAty());
         pop.setListener(this::showMessage);
         pop.show(getWindow().getDecorView());

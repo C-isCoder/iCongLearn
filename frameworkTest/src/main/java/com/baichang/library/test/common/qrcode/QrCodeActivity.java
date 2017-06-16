@@ -12,22 +12,20 @@ import butterknife.OnClick;
 
 public class QrCodeActivity extends CommonActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qrcode);
-        ButterKnife.bind(this);
-    }
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_qrcode);
+    ButterKnife.bind(this);
+  }
 
-    @OnClick({R.id.test_generate_qrcode, R.id.test_scan_qrcode})
-    void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.test_scan_qrcode:
-                startActivity(new Intent(this, ScanActivity.class));
-                break;
-            case R.id.test_generate_qrcode:
-                startActivity(new Intent(this, GenerateActivity.class));
-                break;
-        }
+  @OnClick({ R.id.test_generate_qrcode, R.id.test_scan_qrcode }) void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.test_scan_qrcode:
+        startActivity(new Intent(this, ScanActivity.class));
+        break;
+      case R.id.test_generate_qrcode:
+        startActivity(new Intent(this, GenerateActivity.class));
+        break;
     }
+  }
 }

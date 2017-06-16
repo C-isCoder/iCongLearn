@@ -9,21 +9,12 @@ import java.io.Serializable;
  * Time:2016/9/26-17:57.
  */
 public class InformationData implements Serializable {
-    @Expose
-    public String titile;
-    @Expose
-    public String created;
-    @Expose
-    public String abstractTest;
-    @Expose
-    public String cityId;
-    @Expose
-    public String picture;
-    @Expose
-    public String id;
-    @Expose
-    public String content;
-    @Expose
-    public int type;
-
+  @Expose public String titile;
+  @Expose public String created;
+  @Expose public String abstractTest;
+  @Expose public String cityId;
+  @Expose public String picture;
+  @Expose public String id;
+  @Expose public String content;
+  @Expose public int type;
 }

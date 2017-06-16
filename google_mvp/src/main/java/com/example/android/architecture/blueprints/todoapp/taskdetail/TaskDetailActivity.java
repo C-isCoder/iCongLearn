@@ -33,8 +33,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
   public static final String EXTRA_TASK_ID = "TASK_ID";
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.taskdetail_act);
@@ -49,26 +48,22 @@ public class TaskDetailActivity extends AppCompatActivity {
     // Get the requested task id
     String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
 
-    TaskDetailFragment taskDetailFragment = (TaskDetailFragment) getSupportFragmentManager()
-        .findFragmentById(R.id.contentFrame);
+    TaskDetailFragment taskDetailFragment =
+        (TaskDetailFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
 
     if (taskDetailFragment == null) {
       taskDetailFragment = TaskDetailFragment.newInstance(taskId);
 
-      ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-          taskDetailFragment, R.id.contentFrame);
+      ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), taskDetailFragment,
+          R.id.contentFrame);
     }
 
     // Create the presenter
-    new TaskDetailPresenter(
-        taskId,
-        TasksRepository.getInstance(TasksRemoteDataSource.getInstance(),
-            TasksLocalDataSource.getInstance(this)),
-        taskDetailFragment);
+    new TaskDetailPresenter(taskId, TasksRepository.getInstance(TasksRemoteDataSource.getInstance(),
+        TasksLocalDataSource.getInstance(this)), taskDetailFragment);
   }
 
-  @Override
-  public boolean onSupportNavigateUp() {
+  @Override public boolean onSupportNavigateUp() {
     onBackPressed();
     return true;
   }
