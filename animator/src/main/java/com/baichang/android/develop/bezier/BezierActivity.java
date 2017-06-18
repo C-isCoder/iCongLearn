@@ -32,4 +32,8 @@ public class BezierActivity extends AppCompatActivity {
   public void waveBezier(View view) {
     startActivity(new Intent(this, WaveBezierActivity.class));
   }
+
+  public void pathBezier(View view) {
+    startActivity(new Intent(this, PathBezierActivity.class));
+  }
 }
