@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context="com.baichang.android.develop.advance.ValueAnimatorActivity"
     >
 
@@ -33,13 +33,19 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="recyclerviewSnapHelper"
-      android:text="RecyaclerSnapHelper"
+      android:text="RecyclerSnapHelper"
       />
 
   <Button
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="recycleritemdecoration"
-      android:text="RecyaclerSnapHelper"
+      android:text="RecyclerItemDecoration"
+      />
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="recyclerCityitemdecoration"
+      android:text="recyclerCityItemDecoration"
       />
 </LinearLayout>

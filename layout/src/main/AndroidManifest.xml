@@ -9,8 +9,8 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
     <activity
-        android:label="@string/app_name"
-        android:name=".MainActivity">
+        android:name=".MainActivity"
+        android:label="@string/app_name">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -21,11 +21,13 @@
         android:name=".coordinatorlayout.CoordinatorLayoutActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
     <activity
-        android:label="@string/title_activity_bottom_navigation"
-        android:name=".bootomnavigation.BottomNavigationActivity"/>
+        android:name=".bootomnavigation.BottomNavigationActivity"
+        android:label="@string/title_activity_bottom_navigation"/>
     <activity android:name=".nodatalayout.NoDataBaseActivity"/>
     <activity android:name=".recyclerviewSnapHelper.SnapHelperActivity"/>
-    <activity android:name=".recycleritemdecoration.RecyclerItemDecorationActivity"></activity>
+    <activity android:name=".recycleritemdecoration.RecyclerItemDecorationActivity"/>
+    <activity android:name=".recycleritemdecoration.CityIndexItemDecorationActivity">
+    </activity>
   </application>
 
 </manifest>
