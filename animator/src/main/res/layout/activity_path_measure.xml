@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="pathMeasure"
+      android:text="路径绘制(Windows加载圈)"
+      />
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:onClick="pathPaint"
+      android:text="路径绘制-Dash(设置画笔风格实现)"
+      />
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:onClick="pathPosTan"
+      android:text="PathMeasure Pos Tan"
+      />
+</LinearLayout>
