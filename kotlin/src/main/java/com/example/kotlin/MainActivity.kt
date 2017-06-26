@@ -2,6 +2,7 @@ package com.example.kotlin
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,11 +13,19 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    println("Hello Kotlin")
-    Person("iCong").printName()
+//    println("Hello Kotlin")
+//    Person("iCong").printName()
+//
+//    println("单价:$price")
+//    println("数量:$quantity")
+//    println("产品：$name 总价:${quantity * price}")
+    read()
+  }
 
-    println("单价:$price")
-    println("数量:$quantity")
-    println("产品：$name 总价:${quantity * price}")
+  fun read() {
+    File("build.gradle").readText().filterNot(Char::isWhitespace)
+        .groupBy { it }.map {
+      it.key to it.value.size
+    }.forEach(::println)
   }
 }

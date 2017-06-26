@@ -115,9 +115,12 @@ public class CityIndexItemDecorationActivity extends AppCompatActivity {
         }
         //根据top绘制group
         c.drawRect(left, top - mIndexHeight, right, top, mbgPaint);
-        Paint.FontMetrics fm = mTextPaint.getFontMetrics();
         //文字居中显示
+        Paint.FontMetrics fm = mTextPaint.getFontMetrics();
         float baseLine = top - (mIndexHeight - (fm.bottom - fm.top)) / 2 - fm.bottom;
+        //Rect textRect = new Rect();
+        //mTextPaint.getTextBounds(currentGroupName, 0, currentGroupName.length() - 1, textRect);
+        //float baseLine = (mIndexHeight + textRect.height()) / 2;
         c.drawText(currentGroupName, left + mLeftMargin, baseLine, mTextPaint);
       }
     }
