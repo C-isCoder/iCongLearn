@@ -23,9 +23,13 @@ class MainActivity : AppCompatActivity() {
   }
 
   fun read() {
-    File("build.gradle").readText().filterNot(Char::isWhitespace)
-        .groupBy { it }.map {
-      it.key to it.value.size
-    }.forEach(::println)
+    File("build.gradle")
+        .readText()
+        .filterNot(Char::isWhitespace)
+        .groupBy { it }
+        .map {
+          it.key to it.value.size
+        }
+        .forEach(::println)
   }
 }
