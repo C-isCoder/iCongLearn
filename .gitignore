@@ -9,3 +9,7 @@
 .externalNativeBuild
 iCongLearn.iml
 bugreport.txt
+.idea
+gradle.properties
+local.properties
+build

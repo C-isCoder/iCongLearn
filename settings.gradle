@@ -1,2 +1,2 @@
 include ':animator', ':layout', ':architecture', ':google_mvp', ':database', ':notification',
-    ':kotlin', ':customview', ':frameworkTest', ':processlife'
+    ':kotlin', ':customview', ':frameworkTest', ':processlife', ':water_kotlin'
